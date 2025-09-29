@@ -6,6 +6,8 @@
 
 **Comprehensive job market analytics for Brazilian developers, HR professionals and recruiters**
 
+🌐 **[Visit HireMetrics](https://www.hiremetrics.com.br)** 🌐
+
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-336791?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
