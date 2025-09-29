@@ -71,7 +71,7 @@
    npm run dev
    ```
 
-5. **Access the application**
+6. **Access the application**
    - Frontend: http://localhost:5173
    - Backend API: http://localhost:8000
    - pgAdmin: http://localhost:5050
@@ -121,7 +121,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Naive UI** - Vue 3 component library
 - **ECharts** - Data visualization library
 - **MapLibre GL JS** - Vector mapping library
-- **Stripe** - Payment processing platform
 - **Open Source Community** - For all the amazing tools and libraries
 
 ---
