@@ -18,8 +18,6 @@
 
 </div>
 
----
-
 ## 🎯 Overview
 
 **HireMetrics** is a modern, full-stack SaaS platform designed specifically for Brazilian developers, HR professionals and recruiters. It provides real-time job market analytics, comprehensive data visualization, and advanced reporting capabilities to help make informed hiring decisions.
@@ -32,8 +30,6 @@
 - 🔍 **Smart Filtering System** - Multi-dimensional filters for precise data analysis
 - 🌐 **Brazilian Portuguese Localization** - Complete localization for Brazilian market
 - 🔒 **Enterprise Security** - JWT authentication, email verification, CORS and security headers
-
----
 
 ## 🚀 Quick Start
 
@@ -107,13 +103,9 @@ We welcome contributions! Please follow these steps:
 - Follow the existing code style and conventions
 - Update documentation as needed
 
----
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## 🙏 Acknowledgments
 
@@ -124,8 +116,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **ECharts** - Data visualization library
 - **MapLibre GL JS** - Vector mapping library
 - **Open Source Community** - For all the amazing tools and libraries
-
----
 
 <div align="center">
 
