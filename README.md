@@ -8,6 +8,13 @@
 
 🌐 **[Visit HireMetrics](https://www.hiremetrics.com.br)** 🌐
 
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/450ed07d-91b9-40f9-85db-4ca34a3e9df0" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/f65afa16-58ef-4c83-a043-1227cd282441" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/b7f97dc2-9fa8-4cf8-ae8e-0927f7fe98c1" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/73c03192-3663-4512-aaf6-47b1154dce15" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/9d8a1d96-da0c-4bc2-87ae-cd0c356373ab" />
+
+
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-336791?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
@@ -17,8 +24,6 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 
 </div>
-
----
 
 ## 🎯 Overview
 
@@ -33,17 +38,14 @@
 - 🌐 **Brazilian Portuguese Localization** - Complete localization for Brazilian market
 - 🔒 **Enterprise Security** - JWT authentication, email verification, CORS and security headers
 
----
-
 ## 🚀 Quick Start
 
 ### Prerequisites
 
+- **Docker & Docker Compose**
 - **Node.js** (v16 or higher)
 - **npm** (v7 or higher)
 - **Python** (3.8 or higher)
-- **Docker & Docker Compose**
-- **PostgreSQL** (13 or higher)
 
 ### Installation
 
@@ -107,31 +109,6 @@ We welcome contributions! Please follow these steps:
 - Follow the existing code style and conventions
 - Update documentation as needed
 
----
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **Vue.js** - Progressive JavaScript framework
-- **FastAPI** - Modern Python web framework
-- **dbt Labs** - Data transformation platform
-- **Naive UI** - Vue 3 component library
-- **ECharts** - Data visualization library
-- **MapLibre GL JS** - Vector mapping library
-- **Open Source Community** - For all the amazing tools and libraries
-
----
-
-<div align="center">
-
-**Built with ❤️**
-
-[![Made with Vue.js](https://img.shields.io/badge/Made%20with-Vue.js-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org/)
-[![Made with FastAPI](https://img.shields.io/badge/Made%20with-FastAPI-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-
-</div>
