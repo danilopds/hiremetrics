@@ -180,3 +180,4 @@ node_modules
 /etl/logs
 /etl/data
 /etl/notebooks/*.csv
+/todo
