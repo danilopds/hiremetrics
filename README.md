@@ -35,11 +35,10 @@
 
 ### Prerequisites
 
+- **Docker & Docker Compose**
 - **Node.js** (v16 or higher)
 - **npm** (v7 or higher)
 - **Python** (3.8 or higher)
-- **Docker & Docker Compose**
-- **PostgreSQL** (13 or higher)
 
 ### Installation
 
