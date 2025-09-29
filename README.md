@@ -2,9 +2,9 @@
 
 <div align="center">
 
-![HireMetrics Logo](frontend/src/assets/img/hire-metrics-logo-transparent.png)
+<img src="frontend/src/assets/img/hire-metrics-logo-transparent.png" width="500" height="500">
 
-**Comprehensive job market analytics for Brazilian HR professionals and recruiters**
+**Comprehensive job market analytics for Brazilian developers, HR professionals and recruiters**
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
@@ -26,8 +26,6 @@
 
 - 📊 **Real-time Dashboard Analytics** - Job trends, skills analysis, and market insights
 - 🗺️ **Interactive Geographic Visualization** - Job location mapping across Brazilian cities
-- 💳 **Subscription Management (planned)** - Stripe-based subscriptions present in codebase but currently disabled
-- 💠 **Credits System** - Purchase and consume credits (Mercado Pago integration)
 - 📋 **Advanced Reporting** - CSV export with up to 50,000 records and granular filtering
 - 🔍 **Smart Filtering System** - Multi-dimensional filters for precise data analysis
 - 🌐 **Brazilian Portuguese Localization** - Complete localization for Brazilian market
@@ -91,63 +89,6 @@
 | **Database** | PostgreSQL + DuckDB | Production data + analytical processing |
 | **ETL** | dbt + Prefect | Data transformation and orchestration |
 | **Infrastructure** | Docker + Docker Compose | Containerized deployment |
-| **Payments** | Mercado Pago (active), Stripe (planned) | Credits active; subscriptions code present but disabled |
-
-### Project Structure
-
-```
-hiremetrics/
-├── frontend/                 # Vue.js frontend application
-│   ├── src/
-│   │   ├── api/             # API integration layer
-│   │   ├── assets/          # Images, CSS and static assets
-│   │   ├── components/      # Reusable UI components
-│   │   │   ├── charts/      # Chart components (ECharts)
-│   │   │   ├── common/      # Common UI components
-│   │   │   ├── filters/     # Filter components
-│   │   │   └── maps/        # Map components (MapLibre)
-│   │   ├── config/          # Configuration files
-│   │   ├── layouts/         # Layout components
-│   │   ├── router/          # Vue Router configuration
-│   │   ├── stores/          # Pinia state management
-│   │   ├── styles/          # Style tokens and themes
-│   │   ├── test/            # Test utilities
-│   │   ├── utils/           # Utility functions
-│   │   └── views/           # Page components
-│   │       └── auth/        # Authentication views
-│   ├── docs/                # Frontend documentation
-│   ├── public/              # Static assets
-│   └── package.json         # Frontend dependencies
-├── backend/                  # FastAPI backend application
-│   ├── app/
-│   │   ├── utils/           # Backend utilities (auth, cache, etc.)
-│   │   ├── config.py        # Configuration settings
-│   │   ├── crud.py          # Database operations
-│   │   ├── database.py      # Database connection
-│   │   ├── main.py          # FastAPI application entry
-│   │   ├── models.py        # SQLAlchemy database models
-│   │   └── schemas.py       # Pydantic data schemas
-│   ├── Dockerfile           # Backend container config
-│   └── requirements.txt     # Python dependencies
-├── etl/                      # Data pipeline
-│   ├── dbt/                 # dbt transformation models
-│   │   ├── models/          # dbt SQL models
-│   │   │   ├── dashboard/   # Dashboard-specific models
-│   │   │   ├── marts/       # Business logic layer
-│   │   │   └── staging/     # Raw data staging
-│   │   └── dbt_project.yml  # dbt configuration
-│   ├── scripts/             # ETL orchestration scripts
-│   ├── data/                # Raw data files
-│   ├── logs/                # ETL process logs
-│   ├── etl_flow.py          # Main ETL orchestration
-│   └── requirements.txt     # ETL dependencies
-├── containers/               # Database initialization
-│   └── warehouse/           # SQL migration scripts
-├── docker-compose.yml        # Multi-service orchestration
-├── env.example              # Environment variables template
-├── LICENSE                  # MIT license
-└── package.json             # Root project dependencies
-```
 
 ## 🤝 Contributing
 
