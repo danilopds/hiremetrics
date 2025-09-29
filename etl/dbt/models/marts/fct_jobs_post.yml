@@ -1,0 +1,116 @@
+version: 2
+
+models:
+  - name: fct_jobs_post
+    description: "Fact table containing job posting details with references to dimension tables"
+    config:
+      materialized: incremental
+      unique_key: job_id
+    
+    columns:
+      - name: employer_key
+        description: "Foreign key to dim_employer table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_employer')
+              field: employer_key
+
+      - name: location_key
+        description: "Foreign key to dim_location table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_location')
+              field: location_key
+
+      - name: job_id
+        description: "Unique identifier for the job posting"
+        tests:
+          - unique
+          - not_null
+
+      - name: job_title
+        description: "Title of the job posting"
+        tests:
+          - not_null
+
+      - name: job_publisher
+        description: "Platform or source that published the job posting"
+
+      - name: job_employment_type
+        description: "Primary employment type for the position"
+
+      - name: job_employment_types
+        description: "List of all applicable employment types"
+
+      - name: job_apply_link
+        description: "URL to apply for the job"
+
+      - name: job_apply_is_direct
+        description: "Flag indicating if the application is direct to employer"
+
+      - name: apply_options
+        description: "Available options for applying to the job"
+
+      - name: job_description
+        description: "Full description of the job posting"
+
+      - name: job_is_remote
+        description: "Flag indicating if the job is remote"
+
+      - name: job_posted_at
+        description: "Date when the job was posted"
+
+      - name: job_posted_at_timestamp
+        description: "Timestamp when the job was posted"
+
+      - name: job_posted_at_datetime_utc
+        description: "UTC datetime when the job was posted"
+
+      - name: job_benefits
+        description: "Benefits offered with the position"
+
+      - name: job_google_link
+        description: "Google Jobs link for the posting"
+
+      - name: job_salary
+        description: "Salary information as text"
+
+      - name: job_min_salary
+        description: "Minimum salary offered"
+
+      - name: job_max_salary
+        description: "Maximum salary offered"
+
+      - name: job_salary_period
+        description: "Period for which the salary is specified"
+
+      - name: job_highlights
+        description: "Key highlights of the job posting"
+
+      - name: job_onet_soc
+        description: "O*NET SOC code for the job"
+
+      - name: job_onet_job_zone
+        description: "O*NET job zone classification"
+
+      - name: created_at
+        description: "Timestamp when the record was first created"
+        tests:
+          - not_null
+
+      - name: updated_at
+        description: "Timestamp when the record was last updated"
+        tests:
+          - not_null
+
+      - name: created_by
+        description: "User or process that created the record"
+        tests:
+          - not_null
+
+      - name: updated_by
+        description: "User or process that last updated the record"
+        tests:
+          - not_null

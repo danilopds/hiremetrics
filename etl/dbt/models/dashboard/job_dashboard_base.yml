@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: job_dashboard_base
+    description: "Source view for dashboard filters and exploration."
+    columns:
+      - name: job_id
+        description: "Unique job identifier."
+        tests:
+          - not_null
+          - unique
+      - name: job_title
+        description: "Title of the job."
+      - name: job_employment_type
+        description: "Primary employment type."
+      - name: job_employment_types
+        description: "All employment types (array or string)."
+      - name: job_is_remote
+        description: "Whether the job is remote."
+      - name: job_posted_at_datetime_utc
+        description: "Timestamp when the job was posted."
+      - name: job_city
+        description: "City of the job."
+      - name: job_state
+        description: "State of the job."
+      - name: created_at
+        description: "Record creation timestamp."
+      - name: updated_at
+        description: "Record last update timestamp." 

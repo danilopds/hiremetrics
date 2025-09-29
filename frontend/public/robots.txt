@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://hiremetrics.com.br/sitemap.xml
+
+# Allow crawling of all pages
+Allow: /sobre
+Allow: /contato
+Allow: /termos-de-uso
+Allow: /politica-privacidade
+Allow: /auth/login
+Allow: /auth/register
+Allow: /landingpage
+
+# Disallow admin and private areas
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /reports/ 

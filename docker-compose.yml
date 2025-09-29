@@ -1,0 +1,89 @@
+services:
+  # ETL service
+  hiremetrics_etl:
+    build:
+      context: ./etl
+      dockerfile: Dockerfile
+    container_name: saas_hiremetrics_etl
+    environment:      
+      - DATABASE_URL=postgresql://${WAREHOUSE_USER}:${WAREHOUSE_PASSWORD}@hiremetrics_warehouse:5432/${WAREHOUSE_DB}
+      - MOTHERDUCK_TOKEN=${MOTHERDUCK_TOKEN}
+      - MOTHERDUCK_DATABASE=${MOTHERDUCK_DATABASE}
+    env_file:
+      - .env
+    volumes:
+      - ./etl:/app
+      - ./etl/data:/app/data
+    depends_on:
+      hiremetrics_warehouse:
+        condition: service_healthy
+    networks:
+      - hiremetrics_network
+
+  # loader containers  
+  hiremetrics_warehouse:
+    image: postgres:13
+    container_name: saas_hiremetrics_warehouse
+    environment:
+      POSTGRES_USER: ${WAREHOUSE_USER}
+      POSTGRES_PASSWORD: ${WAREHOUSE_PASSWORD}
+      POSTGRES_DB: ${WAREHOUSE_DB}
+    env_file:
+        - .env  
+    volumes:
+      - ./containers/warehouse:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${WAREHOUSE_USER}" ]
+      interval: 5s
+      retries: 5
+    #restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - hiremetrics_network
+
+  hiremetrics_pgadmin:
+    container_name: saas_hiremetrics_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    #restart: always
+    ports:
+      - "5050:80"
+    depends_on:
+      - hiremetrics_warehouse
+    networks:
+      - hiremetrics_network
+
+  hiremetrics_api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: saas_hiremetrics_api
+    environment:
+      - DATABASE_URL=postgresql://${WAREHOUSE_USER}:${WAREHOUSE_PASSWORD}@hiremetrics_warehouse:5432/${WAREHOUSE_DB}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=50
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:5173}
+      - CORS_ORIGINS=${CORS_ORIGINS:-}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_FROM=${MAIL_FROM}
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      hiremetrics_warehouse:
+        condition: service_healthy
+    networks:
+      - hiremetrics_network
+
+networks:
+  hiremetrics_network:
+    name: hiremetrics_network      

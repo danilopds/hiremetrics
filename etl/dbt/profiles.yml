@@ -1,0 +1,20 @@
+jobsetl:
+  # This is the name of the dbt profile.
+  target: duckdb
+  # Specifies the default target database connection.
+
+  outputs:
+    # Defines the connection configurations for different targets/environments.
+
+    duckdb:
+      type: duckdb
+      # Specifies that the database type is DuckDB.
+      
+      path:  "md:{{env_var('MOTHERDUCK_DATABASE')}}?motherduck_token={{env_var('MOTHERDUCK_TOKEN')}}"
+      # The path to the DuckDB database file.
+      
+      schema: target
+      # The schema within the DuckDB database.
+      
+      threads: 1
+      # The number of threads to use for dbt operations on this connection.

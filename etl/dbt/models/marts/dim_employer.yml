@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_employer
+    description: "Dimension table containing employer information from job postings"
+    config:
+      materialized: incremental
+      unique_key: employer_key
+    
+    columns:
+      - name: employer_key
+        description: "Surrogate key generated for the employer"
+        tests:
+          - unique
+          - not_null
+
+      - name: employer_name
+        description: "Name of the employer/company"
+        tests:
+          - not_null
+
+      - name: employer_logo
+        description: "URL to the employer's logo image"
+
+      - name: employer_website
+        description: "URL to the employer's website"
+
+      - name: created_at
+        description: "Timestamp when the record was first created"
+        tests:
+          - not_null
+
+      - name: updated_at
+        description: "Timestamp when the record was last updated"
+        tests:
+          - not_null
+
+      - name: created_by
+        description: "User or process that created the record"
+        tests:
+          - not_null
+
+      - name: updated_by
+        description: "User or process that last updated the record"
+        tests:
+          - not_null

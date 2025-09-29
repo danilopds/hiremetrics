@@ -1,0 +1,110 @@
+version: 2
+
+sources:
+  - name: source
+    schema: source
+    tables:
+      - name: jobs
+        description: "Table containing job listings from JSearch API"
+        columns:
+          - name: job_id
+            description: "Unique identifier for each job posting"
+            tests:
+              - unique
+              - not_null
+          - name: job_title
+            description: "Title of the job position"
+            tests:
+              - not_null
+          - name: employer_name
+            description: "Name of the company offering the position"
+            tests:
+              - not_null
+          - name: employer_logo
+            description: "URL to the employer's logo"
+          - name: employer_website
+            description: "URL to the employer's website"
+          - name: job_publisher
+            description: "Source that published the job listing"
+          - name: job_employment_type
+            description: "Type of employment (e.g., FULLTIME, PARTTIME)"
+          - name: job_employment_types
+            description: "Detailed employment type information"
+          - name: job_apply_link
+            description: "URL to apply for the position"
+          - name: job_apply_is_direct
+            description: "Boolean indicating if the application is direct"
+          - name: apply_options
+            description: "Available application options"
+          - name: job_description
+            description: "Detailed job description"
+          - name: job_is_remote
+            description: "Boolean indicating if the position is remote"
+          - name: job_posted_at
+            description: "Date when the job was posted"
+            tests:
+              - not_null
+          - name: job_posted_at_timestamp
+            description: "Unix timestamp of when the job was posted"
+          - name: job_posted_at_datetime_utc
+            description: "UTC datetime of when the job was posted"
+          - name: job_location
+            description: "Full job location string"
+          - name: job_city
+            description: "City where the job is located"
+          - name: job_state
+            description: "State/Province where the job is located"
+          - name: job_country
+            description: "Country where the job is located"
+          - name: job_latitude
+            description: "Geographic latitude of the job location"
+          - name: job_longitude
+            description: "Geographic longitude of the job location"
+          - name: job_benefits
+            description: "List of benefits offered with the position"
+          - name: job_google_link
+            description: "Google search link for the job posting"
+          - name: job_salary
+            description: "Salary information if available"
+          - name: job_min_salary
+            description: "Minimum salary for the position"
+          - name: job_max_salary
+            description: "Maximum salary for the position"
+          - name: job_salary_period
+            description: "Period for the salary (e.g., YEARLY, HOURLY)"
+          - name: job_highlights
+            description: "Key highlights of the job posting"
+          - name: job_onet_soc
+            description: "ONET Standard Occupational Classification code"
+          - name: job_onet_job_zone
+            description: "ONET Job Zone classification"
+          - name: created_at
+            description: "Timestamp when the record was created"
+            tests:
+              - not_null
+          - name: updated_at
+            description: "Timestamp when the record was last updated"
+            tests:
+              - not_null
+          - name: created_by
+            description: "Process that created the record"
+            tests:
+              - not_null
+          - name: updated_by
+            description: "Process that last updated the record"
+            tests:
+              - not_null        
+      - name: jobs_skills
+        description: "Table containing skills for each job"
+        columns:
+          - name: job_id
+            description: "Unique identifier for each job posting"
+            tests:
+              - unique
+              - not_null
+          - name: extracted_skills
+            description: "List of skills for the job"
+          - name: seniority
+            description: "Seniority level for the job"
+            tests:
+              - not_null
