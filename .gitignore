@@ -181,3 +181,4 @@ node_modules
 /etl/data
 /etl/notebooks/*.csv
 /todo
+/.cursor
