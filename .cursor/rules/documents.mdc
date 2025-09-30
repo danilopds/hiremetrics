@@ -1,8 +1,0 @@
----
-alwaysApply: true
----
-**Supporting documents**
-- [CHANGELOG.md](mdc:documents/CHANGELOG.md) Read this file before applying new code changes, only log changes when requested by the user.
-- [TODO.md](mdc:documents/TODO.md) Review this file to get more context, and only update it when requested by the user.
-- [FEATURES.md](mdc:documents/FEATURES.md) Review and only update this file when requested by the user.
-- Do not create extra documents besides those mentioned above.
