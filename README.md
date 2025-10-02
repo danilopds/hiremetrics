@@ -95,6 +95,13 @@
 | **ETL** | dbt + Prefect | Data transformation and orchestration |
 | **Infrastructure** | Docker + Docker Compose | Containerized deployment |
 
+### Design
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/e5bac12d-e083-4cdc-bf11-2ed3bfb22692" />
+
+Article in PT-BR explaining details of the solution desing:
+https://app.beehiiv.com/posts/2cbb85cb-fdaa-40d1-81a2-6885e5058c3e?sort=last_updated
+
+
 ## 🤝 Contributing
 
 We welcome contributions! Please follow these steps:
