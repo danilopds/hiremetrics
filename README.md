@@ -99,7 +99,7 @@
 <img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/e5bac12d-e083-4cdc-bf11-2ed3bfb22692" />
 
 Article in PT-BR explaining details of the solution design:
-https://app.beehiiv.com/posts/2cbb85cb-fdaa-40d1-81a2-6885e5058c3e?sort=last_updated
+[Compartilhando a arquitetura do projeto](https://hiremetrics.beehiiv.com/p/compartilhando-arquitetura-do-projeto)
 
 
 ## 🤝 Contributing
