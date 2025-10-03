@@ -1,16 +1,17 @@
+import uuid
+
 from sqlalchemy import (
     Boolean,
     Column,
-    String,
-    DateTime,
-    func,
-    Integer,
     Date,
-    Text,
+    DateTime,
     ForeignKey,
+    Integer,
+    String,
+    Text,
+    func,
 )
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
 
 from .database import Base
 
@@ -53,8 +54,6 @@ class User(Base):
 
     # Marketing preferences
     marketing_emails = Column(Boolean, default=True, nullable=False)
-
-
 
 
 class JobSkills(Base):

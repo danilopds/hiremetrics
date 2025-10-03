@@ -1,47 +1,49 @@
-from fastapi import (
-    FastAPI,
-    Depends,
-    HTTPException,
-    status,
-    Query,
-    Request,
-    Body,
-)
-from fastapi.security import OAuth2PasswordRequestForm
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse, RedirectResponse
-from sqlalchemy.orm import Session
+import base64
+import csv
+import io
+import json
 import logging
+import os
+import time
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-from .utils.auth_utils import create_access_token, get_current_user
-from sqlalchemy import text
-import os
-import io
-import csv
+
 import requests
-from collections import defaultdict
-import json
-import time
-import base64
+from fastapi import (
+    Body,
+    Depends,
+    FastAPI,
+    HTTPException,
+    Query,
+    Request,
+    status,
+)
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse, StreamingResponse
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+
+from .utils.auth_utils import create_access_token, get_current_user
 
 # Configure module logger
 logger = logging.getLogger(__name__)
 
-from .database import get_db, engine
-from . import models, schemas, crud
+from . import crud, models, schemas
 from .config import settings
+from .database import engine, get_db
 from .schemas import (
-    JobDashboardBase,
-    TopSkill,
+    ContactForm,
+    ContactResponse,
     CSVExportFilters,
     CSVExportRequest,
     ExportCountResponse,
-    ContactForm,
-    ContactResponse,
+    JobDashboardBase,
+    TopSkill,
 )
-from .utils.query_builder import SecureQueryBuilder
 from .utils.cache import cache_result, query_cache
+from .utils.query_builder import SecureQueryBuilder
 
 # Create database tables
 models.Base.metadata.create_all(bind=engine)
@@ -231,8 +233,9 @@ def create_user_token(
 async def send_verification_email(email: str, token: str):
     """Send email verification email"""
     try:
-        from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
         import os
+
+        from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 
         # Email configuration
         conf = ConnectionConfig(
@@ -299,8 +302,9 @@ async def send_verification_email(email: str, token: str):
 async def send_password_reset_email(email: str, token: str):
     """Send password reset email"""
     try:
-        from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
         import os
+
+        from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 
         # Email configuration
         conf = ConnectionConfig(
@@ -3782,7 +3786,6 @@ async def export_csv(
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-
     """Export job data as CSV with comprehensive filtering"""
     try:
         # Validate max records with secure input validation
@@ -4409,9 +4412,6 @@ def get_job_locations_geo(
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
-
-
-
 # Skills filtering endpoint
 @app.get("/api/skills/jobs", response_model=list[schemas.JobExportData])
 async def get_jobs_by_skills(
@@ -4533,8 +4533,9 @@ async def send_contact_email(contact_data: ContactForm):
     """
     try:
         # Import here to avoid circular imports
-        from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
         import os
+
+        from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
 
         # Email configuration
         conf = ConnectionConfig(
