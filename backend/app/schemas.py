@@ -1,6 +1,7 @@
-from pydantic import BaseModel, EmailStr, UUID4, Field
-from typing import Optional, List, Dict, Any
-from datetime import datetime, date
+from datetime import date, datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import UUID4, BaseModel, EmailStr, Field
 
 
 class UserBase(BaseModel):
@@ -142,9 +143,6 @@ class PasswordChangeResponse(BaseModel):
 
 class UserPreferencesUpdate(BaseModel):
     marketing_emails: bool
-
-
-
 
 
 class ContactForm(BaseModel):

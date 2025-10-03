@@ -1,7 +1,7 @@
-import time
-from typing import Any, Dict, Optional
-from functools import wraps
 import logging
+import time
+from functools import wraps
+from typing import Any, Dict, Optional
 
 logger = logging.getLogger(__name__)
 

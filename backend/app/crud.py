@@ -1,9 +1,11 @@
-from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, timezone
-from . import models, schemas
-from .utils.auth import get_password_hash, verify_password
+
 from passlib.context import CryptContext
 from sqlalchemy import desc
+from sqlalchemy.orm import Session
+
+from . import models, schemas
+from .utils.auth import get_password_hash, verify_password
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -82,9 +84,6 @@ def change_user_password(
     db.commit()
     db.refresh(user)
     return True
-
-
-
 
 
 # Email verification functions

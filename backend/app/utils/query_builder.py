@@ -3,10 +3,11 @@ Secure Query Builder for SQL Injection Prevention
 Handles parameterized queries and input validation
 """
 
-from typing import Dict, List, Optional, Any, Tuple
-from sqlalchemy import text
 import re
 from datetime import datetime
+from typing import Any, Dict, List, Optional, Tuple
+
+from sqlalchemy import text
 
 
 class SecureQueryBuilder:
