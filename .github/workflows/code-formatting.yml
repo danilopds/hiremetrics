@@ -1,0 +1,40 @@
+name: Code Formatting Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install formatting tools
+      run: |
+        pip install black==25.9.0 isort==6.1.0
+        
+    - name: Check backend code formatting with black
+      run: |
+        black --check ./backend
+        
+    - name: Check ETL code formatting with black
+      run: |
+        black --check ./etl
+        
+    - name: Check backend import sorting with isort
+      run: |
+        isort --profile black --filter-files --check ./backend
+        
+    - name: Check ETL import sorting with isort
+      run: |
+        isort --profile black --filter-files --check ./etl

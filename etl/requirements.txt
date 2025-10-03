@@ -11,3 +11,5 @@ langchain==0.3.25
 langchain-openai==0.3.19
 tqdm==4.65.0
 prefect==3.4.4
+black==25.9.0
+isort==6.1.0
