@@ -4,8 +4,8 @@ Ensures all logging output is properly captured by Prefect
 """
 
 import logging
-import sys
 import os
+import sys
 
 
 def configure_logging(level=logging.INFO, script_name="ETL"):

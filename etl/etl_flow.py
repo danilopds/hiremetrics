@@ -15,15 +15,15 @@ docker exec saas_hiremetrics_etl python scripts/copy_job_dashboard_base.py
 docker exec saas_hiremetrics_etl python etl_flow.py
 """
 
-from prefect import flow, task
-import subprocess
-from pathlib import Path
-import sys
-import shutil
 import logging
+import shutil
+import subprocess
+import sys
+from pathlib import Path
 
 # Configure logging
 from logging_config import configure_logging, get_logger
+from prefect import flow, task
 
 configure_logging(level=logging.INFO, script_name="ETL")
 logger = get_logger(__name__)

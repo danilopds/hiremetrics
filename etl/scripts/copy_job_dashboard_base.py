@@ -1,14 +1,15 @@
-import duckdb
-import pandas as pd
-from sqlalchemy import create_engine
-from sqlalchemy.exc import SQLAlchemyError
-import numpy as np
 import json
-from dotenv import load_dotenv
+import logging
 import os
 import sys
-import logging
 from pathlib import Path
+
+import duckdb
+import numpy as np
+import pandas as pd
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
 
 # Configure logging to ensure Prefect capture
 sys.path.append(str(Path(__file__).parent.parent))
@@ -33,7 +34,9 @@ POSTGRES_SCHEMA = "target"  # Change if needed
 duckdb_db_name = os.getenv("MOTHERDUCK_DATABASE")
 duckdb_token = os.getenv("MOTHERDUCK_TOKEN")
 if not duckdb_db_name or not duckdb_token:
-    raise ValueError("MOTHERDUCK_DATABASE and MOTHERDUCK_TOKEN environment variables are required")
+    raise ValueError(
+        "MOTHERDUCK_DATABASE and MOTHERDUCK_TOKEN environment variables are required"
+    )
 
 
 def copy_table(con, table_name, postgres_table):
