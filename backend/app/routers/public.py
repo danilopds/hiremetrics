@@ -4,6 +4,7 @@ This module contains all public-facing endpoints that don't require authenticati
 These endpoints are designed for the landing page and allow potential users to
 preview data before signing up.
 """
+
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -13,7 +14,8 @@ from sqlalchemy.orm import Session
 from .. import schemas
 from ..database import get_db
 from ..schemas import CSVExportRequest, ExportCountResponse
-from ..services.query_service import build_where_clause_and_params, get_job_platforms
+from ..services.query_service import (build_where_clause_and_params,
+                                      get_job_platforms)
 from ..utils.query_builder import SecureQueryBuilder
 
 router = APIRouter()
@@ -190,7 +192,7 @@ async def public_get_available_positions(db: Session = Depends(get_db)):
     """
     Public endpoint for getting available positions (no authentication required).
     Used for the home page data preview section to populate position filters.
-    
+
     Returns a limited list of the most common positions to avoid overwhelming
     unauthenticated users.
     """
@@ -321,9 +323,7 @@ async def public_get_available_skills(db: Session = Depends(get_db)):
         return skills
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching skills: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching skills: {str(e)}")
 
 
 @router.get("/available-seniority-levels", response_model=list[str])

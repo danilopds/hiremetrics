@@ -1,4 +1,5 @@
 """Email service for sending transactional emails"""
+
 import os
 
 from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
@@ -132,4 +133,3 @@ async def send_password_reset_email(email: str, token: str):
     except Exception as e:
         print(f"Error sending password reset email: {e}")
         raise e
-

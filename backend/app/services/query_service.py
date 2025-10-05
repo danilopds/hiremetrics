@@ -1,4 +1,5 @@
 """Common query builders and database helpers"""
+
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
@@ -165,4 +166,3 @@ def build_where_clause_and_params(filters: CSVExportFilters):
         raise ValueError(f"Invalid filter input: {str(e)}")
     except Exception as e:
         raise ValueError(f"Error building filter conditions: {str(e)}")
-

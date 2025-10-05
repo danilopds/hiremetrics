@@ -6,6 +6,7 @@ This module contains all reporting and export endpoints including:
 - Export preview
 - Available filter options (locations, employment types, etc.)
 """
+
 import csv
 import io
 from datetime import datetime
@@ -19,7 +20,8 @@ from sqlalchemy.orm import Session
 from .. import models, schemas
 from ..database import get_db
 from ..schemas import CSVExportRequest, ExportCountResponse
-from ..services.query_service import build_where_clause_and_params, get_job_platforms
+from ..services.query_service import (build_where_clause_and_params,
+                                      get_job_platforms)
 from ..utils.auth_utils import get_current_user
 from ..utils.query_builder import SecureQueryBuilder
 

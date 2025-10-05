@@ -1,4 +1,5 @@
 """Contact form endpoint"""
+
 import os
 from datetime import datetime
 
@@ -78,4 +79,3 @@ async def send_contact_email(contact_data: ContactForm):
             error_message = "Erro de conexão com servidor de e-mail. Verifique a configuração de rede."
 
         return ContactResponse(success=False, message=error_message)
-

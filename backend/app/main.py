@@ -1,4 +1,5 @@
 """Main FastAPI application initialization and configuration"""
+
 import logging
 from datetime import datetime
 
@@ -10,17 +11,8 @@ from .config import settings
 from .database import engine
 from .middleware.logging import user_journey_logger
 from .middleware.security import add_security_headers
-from .routers import (
-    auth,
-    cache,
-    companies,
-    contact,
-    dashboard,
-    public,
-    publishers,
-    reports,
-    skills,
-)
+from .routers import (auth, cache, companies, contact, dashboard, public,
+                      publishers, reports, skills)
 
 # Configure module logger
 logger = logging.getLogger(__name__)

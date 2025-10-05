@@ -1,4 +1,5 @@
 """User journey logging middleware"""
+
 import base64
 import json
 import logging
@@ -86,4 +87,3 @@ async def user_journey_logger(request: Request, call_next):
     print(f"USER: user_id={user_id}")
 
     return response
-

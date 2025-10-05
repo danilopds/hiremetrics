@@ -3,12 +3,13 @@
 This module contains all company-related analytics endpoints including:
 - Top companies by job count
 - Company seniority distribution
-- Employment type distribution  
+- Employment type distribution
 - Remote job percentages
 - Company job timelines
 - Top skills by company
 - Company KPIs
 """
+
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query

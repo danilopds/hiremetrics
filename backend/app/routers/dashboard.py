@@ -1,4 +1,5 @@
 """Core dashboard data endpoints"""
+
 import logging
 from typing import Optional
 
@@ -1010,4 +1011,3 @@ def get_employment_type_distribution(
         raise HTTPException(status_code=400, detail=f"Invalid input: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail="Internal server error")
-

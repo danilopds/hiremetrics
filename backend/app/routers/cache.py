@@ -1,4 +1,5 @@
 """Cache management endpoints"""
+
 from fastapi import APIRouter
 
 from ..utils.cache import query_cache
@@ -21,4 +22,3 @@ async def clear_cache():
     """Clear all cached data"""
     query_cache.clear()
     return {"message": "Cache cleared successfully"}
-

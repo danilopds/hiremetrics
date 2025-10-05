@@ -8,6 +8,7 @@ This module contains all publisher-related analytics endpoints including:
 - Publishers timeline
 - Direct vs indirect application distribution
 """
+
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query

@@ -59,21 +59,21 @@ def authenticate_user(db: Session, email: str, password: str):
     user = get_user_by_email(db, email)
     if not user:
         return False
-    
+
     # Check if user has a password hash (OAuth users might not have one)
     if not user.password_hash:
         return False
-    
+
     # Check if password hash looks valid (bcrypt hashes start with $2b$, $2a$, or $2y$)
-    if not user.password_hash.startswith(('$2b$', '$2a$', '$2y$')):
+    if not user.password_hash.startswith(("$2b$", "$2a$", "$2y$")):
         # Invalid hash format - might be plain text or corrupted
         # Log this for investigation
         print(f"WARNING: Invalid password hash format for user {user.email}")
         return False
-    
+
     if not verify_password(password, user.password_hash):
         return False
-    
+
     user.last_login = datetime.utcnow()
     db.commit()
     return user

@@ -1,4 +1,5 @@
 """Security middleware for adding security headers"""
+
 from fastapi import Request
 
 
@@ -20,4 +21,3 @@ async def add_security_headers(request: Request, call_next):
         )
 
     return response
-

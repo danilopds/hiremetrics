@@ -1,4 +1,5 @@
 """Skills filtering endpoints"""
+
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -107,4 +108,3 @@ async def get_jobs_by_skills(
         raise HTTPException(status_code=400, detail=f"Invalid input: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail="Internal server error")
-

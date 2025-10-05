@@ -1,4 +1,5 @@
 """Authentication endpoints"""
+
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
@@ -11,7 +12,8 @@ from sqlalchemy.orm import Session
 from .. import crud, models, schemas
 from ..config import settings
 from ..database import get_db
-from ..services.email_service import send_password_reset_email, send_verification_email
+from ..services.email_service import (send_password_reset_email,
+                                      send_verification_email)
 from ..services.token_service import create_user_token
 from ..utils.auth_utils import get_current_user
 
@@ -88,9 +90,7 @@ async def verify_email(
     return schemas.EmailVerificationResponse(success=True, message=message)
 
 
-@router.post(
-    "/resend-verification", response_model=schemas.ResendVerificationResponse
-)
+@router.post("/resend-verification", response_model=schemas.ResendVerificationResponse)
 async def resend_verification(
     request: schemas.ResendVerificationRequest, db: Session = Depends(get_db)
 ):
@@ -145,9 +145,7 @@ async def reset_password(
     return schemas.ResetPasswordResponse(success=True, message=message)
 
 
-@router.post(
-    "/validate-reset-token", response_model=schemas.ValidateResetTokenResponse
-)
+@router.post("/validate-reset-token", response_model=schemas.ValidateResetTokenResponse)
 async def validate_reset_token(
     request: schemas.ValidateResetTokenRequest, db: Session = Depends(get_db)
 ):
@@ -329,4 +327,3 @@ async def update_user_preferences(
         )
 
     return preferences
-

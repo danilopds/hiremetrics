@@ -1,4 +1,5 @@
 """Token service for JWT operations"""
+
 from datetime import timedelta
 from typing import Optional
 
@@ -16,4 +17,3 @@ def create_user_token(
         "auth_provider": getattr(user, "auth_provider", "email"),  # Handle OAuth users
     }
     return create_access_token(data, expires_delta)
-
