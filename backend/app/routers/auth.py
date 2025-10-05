@@ -12,8 +12,7 @@ from sqlalchemy.orm import Session
 from .. import crud, models, schemas
 from ..config import settings
 from ..database import get_db
-from ..services.email_service import (send_password_reset_email,
-                                      send_verification_email)
+from ..services.email_service import send_password_reset_email, send_verification_email
 from ..services.token_service import create_user_token
 from ..utils.auth_utils import get_current_user
 

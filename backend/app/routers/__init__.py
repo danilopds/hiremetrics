@@ -1,7 +1,16 @@
 """API route handlers"""
 
-from . import (auth, cache, companies, contact, dashboard, public, publishers,
-               reports, skills)
+from . import (
+    auth,
+    cache,
+    companies,
+    contact,
+    dashboard,
+    public,
+    publishers,
+    reports,
+    skills,
+)
 
 __all__ = [
     "auth",

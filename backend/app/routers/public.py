@@ -14,8 +14,7 @@ from sqlalchemy.orm import Session
 from .. import schemas
 from ..database import get_db
 from ..schemas import CSVExportRequest, ExportCountResponse
-from ..services.query_service import (build_where_clause_and_params,
-                                      get_job_platforms)
+from ..services.query_service import build_where_clause_and_params, get_job_platforms
 from ..utils.query_builder import SecureQueryBuilder
 
 router = APIRouter()
