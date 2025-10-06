@@ -5,8 +5,9 @@ Copy this file and modify it for testing your endpoints.
 Replace 'my_endpoint' with your actual endpoint name.
 """
 
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
 from fastapi import HTTPException
 
 # Import the function you want to test
@@ -58,9 +59,7 @@ class TestYourEndpoint:
         # assert params["filter_param"] == "value"
         pass
 
-    def test_endpoint_with_empty_results(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_endpoint_with_empty_results(self, mock_db_session, mock_get_job_platforms):
         """Test endpoint when no results match filters"""
         # Arrange
         mock_result = MagicMock()
@@ -109,6 +108,7 @@ class TestYourEndpoint:
         """Test that database errors are handled gracefully"""
         # Arrange
         from sqlalchemy.exc import SQLAlchemyError
+
         mock_db_session.execute.side_effect = SQLAlchemyError("Database error")
 
         # Act & Assert
@@ -138,7 +138,7 @@ class TestYourEndpoint:
         """Test with boundary values (min/max)"""
         # Test minimum value
         # result_min = your_function(limit=1, db=mock_db_session)
-        
+
         # Test maximum value
         # result_max = your_function(limit=100, db=mock_db_session)
         pass
@@ -147,6 +147,7 @@ class TestYourEndpoint:
 # ====================================
 # PARAMETRIZED TESTS (OPTIONAL)
 # ====================================
+
 
 @pytest.mark.parametrize(
     "param_value,expected_result",
@@ -162,9 +163,7 @@ def test_endpoint_with_various_values(
     """Test endpoint with various parameter values"""
     # Arrange
     mock_result = MagicMock()
-    mock_result.mappings.return_value.all.return_value = [
-        {"result": expected_result}
-    ]
+    mock_result.mappings.return_value.all.return_value = [{"result": expected_result}]
     mock_db_session.execute.return_value = mock_result
 
     # Act
@@ -199,4 +198,3 @@ Remember:
 5. Don't test implementation details
 6. Keep tests independent
 """
-

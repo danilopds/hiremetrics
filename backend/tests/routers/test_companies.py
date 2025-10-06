@@ -7,17 +7,17 @@ Tests the get_top_companies endpoint with various scenarios:
 - Error handling
 """
 
+from unittest.mock import MagicMock, Mock, patch
+
 import pytest
-from unittest.mock import MagicMock, patch, Mock
+from app.routers.companies import get_top_companies
 from fastapi import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
-
-from app.routers.companies import get_top_companies
 
 
 class TestGetTopCompanies:
     """Test suite for get_top_companies endpoint
-    
+
     IMPORTANT: Frontend Usage Pattern
     ---------------------------------
     The frontend (companies.js store) ALWAYS sends these parameters:
@@ -25,12 +25,12 @@ class TestGetTopCompanies:
     - search_position_query: 'Data Engineer' (or selected position)
     - job_posted_at_date_from: Date (defaults to 30 days ago)
     - job_posted_at_date_to: Date (defaults to today)
-    
+
     Optional filters:
     - employer_name: Company name if filtered
     - job_is_remote: 'true'/'false' if filtered
     - seniority: Seniority level if filtered
-    
+
     See: frontend/src/stores/companies.js (_buildParams function)
     """
 
@@ -54,13 +54,13 @@ class TestGetTopCompanies:
             employer_name=None,  # Not filtered
             job_is_remote=None,  # Not filtered
             seniority=None,  # Not filtered
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
         assert result == sample_company_data
         assert len(result) == 5
-        
+
         # Verify all parameters are passed to query
         params = mock_db_session.execute.call_args[0][1]
         assert params["limit"] == 20
@@ -90,7 +90,7 @@ class TestGetTopCompanies:
             job_is_remote=None,
             seniority=None,
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -149,7 +149,7 @@ class TestGetTopCompanies:
             job_is_remote=None,
             seniority=None,
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -177,7 +177,7 @@ class TestGetTopCompanies:
             job_is_remote="true",
             seniority=None,
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -204,7 +204,7 @@ class TestGetTopCompanies:
             job_is_remote=None,
             seniority="Senior",
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -230,7 +230,7 @@ class TestGetTopCompanies:
             employer_name=None,
             job_is_remote=None,
             seniority=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -287,7 +287,7 @@ class TestGetTopCompanies:
             job_is_remote=None,
             seniority=None,
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -312,7 +312,7 @@ class TestGetTopCompanies:
             job_is_remote=None,
             seniority=None,
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -339,7 +339,7 @@ class TestGetTopCompanies:
             job_is_remote=None,
             seniority=None,
             search_position_query=None,
-            db=mock_db_session
+            db=mock_db_session,
         )
 
         # Assert
@@ -355,7 +355,9 @@ class TestGetTopCompanies:
     ):
         """Test that database errors are handled gracefully"""
         # Arrange
-        mock_db_session.execute.side_effect = SQLAlchemyError("Database connection error")
+        mock_db_session.execute.side_effect = SQLAlchemyError(
+            "Database connection error"
+        )
 
         # Act & Assert
         with pytest.raises(HTTPException) as exc_info:
@@ -367,9 +369,9 @@ class TestGetTopCompanies:
                 job_is_remote=None,
                 seniority=None,
                 search_position_query=None,
-                db=mock_db_session
+                db=mock_db_session,
             )
-        
+
         assert exc_info.value.status_code == 500
         assert "Internal server error" in str(exc_info.value.detail)
 
@@ -390,9 +392,8 @@ class TestGetTopCompanies:
                 job_is_remote=None,
                 seniority=None,
                 search_position_query=None,
-                db=mock_db_session
+                db=mock_db_session,
             )
-        
+
         assert exc_info.value.status_code == 500
         assert "Internal server error" in str(exc_info.value.detail)
-

@@ -8,9 +8,9 @@ Tests input validation methods to ensure:
 - Boundary value handling
 """
 
-import pytest
 from datetime import datetime
 
+import pytest
 from app.utils.query_builder import SecureQueryBuilder
 
 
@@ -161,7 +161,9 @@ class TestValidateTextInput:
 
     def test_validate_text_input_with_special_chars(self):
         """Test validation with allowed special characters"""
-        result = SecureQueryBuilder.validate_text_input("O'Reilly & Associates", "company")
+        result = SecureQueryBuilder.validate_text_input(
+            "O'Reilly & Associates", "company"
+        )
         assert result == "O'Reilly & Associates"
 
     def test_validate_text_input_with_unicode(self):
@@ -177,12 +179,16 @@ class TestValidateTextInput:
     def test_validate_text_input_sql_injection_drop_table(self):
         """Test that SQL DROP TABLE injection is blocked"""
         with pytest.raises(ValueError, match="Invalid input detected"):
-            SecureQueryBuilder.validate_text_input("'; DROP TABLE companies; --", "company")
+            SecureQueryBuilder.validate_text_input(
+                "'; DROP TABLE companies; --", "company"
+            )
 
     def test_validate_text_input_sql_injection_union_select(self):
         """Test that UNION SELECT injection is blocked"""
         with pytest.raises(ValueError, match="Invalid input detected"):
-            SecureQueryBuilder.validate_text_input("' UNION SELECT * FROM users --", "company")
+            SecureQueryBuilder.validate_text_input(
+                "' UNION SELECT * FROM users --", "company"
+            )
 
     def test_validate_text_input_sql_injection_or_1_equals_1(self):
         """Test that OR 1=1 injection is blocked"""
@@ -218,7 +224,9 @@ class TestValidateListInput:
 
     def test_validate_list_input_with_comma_separated_string(self):
         """Test validation with comma-separated string"""
-        result = SecureQueryBuilder.validate_list_input("skill1,skill2,skill3", "skills")
+        result = SecureQueryBuilder.validate_list_input(
+            "skill1,skill2,skill3", "skills"
+        )
         assert result == ["skill1", "skill2", "skill3"]
 
     def test_validate_list_input_strips_whitespace(self):
@@ -243,7 +251,9 @@ class TestValidateListInput:
 
     def test_validate_list_input_invalid_type(self):
         """Test that invalid type raises ValueError"""
-        with pytest.raises(ValueError, match="must be a list or comma-separated string"):
+        with pytest.raises(
+            ValueError, match="must be a list or comma-separated string"
+        ):
             SecureQueryBuilder.validate_list_input(123, "skills")
 
     def test_validate_list_input_with_non_string_items(self):
@@ -259,7 +269,7 @@ class TestBuildWhereClause:
         """Test building WHERE clause with single filter"""
         filters = {"employer_name": "Tech Corp"}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert "WHERE" in where_clause
         assert "employer_name = :param_employer_name" in where_clause
         assert params["param_employer_name"] == "Tech Corp"
@@ -268,7 +278,7 @@ class TestBuildWhereClause:
         """Test building WHERE clause with multiple filters"""
         filters = {"employer_name": "Tech Corp", "seniority": "Senior"}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert "WHERE" in where_clause
         assert "AND" in where_clause
         assert "employer_name = :param_employer_name" in where_clause
@@ -279,7 +289,7 @@ class TestBuildWhereClause:
         """Test that None values are ignored"""
         filters = {"employer_name": "Tech Corp", "seniority": None}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert "employer_name = :param_employer_name" in where_clause
         assert "seniority" not in where_clause
         assert len(params) == 1
@@ -288,7 +298,7 @@ class TestBuildWhereClause:
         """Test that empty strings are ignored"""
         filters = {"employer_name": "Tech Corp", "seniority": ""}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert "employer_name = :param_employer_name" in where_clause
         assert "seniority" not in where_clause
         assert len(params) == 1
@@ -297,7 +307,7 @@ class TestBuildWhereClause:
         """Test that 'null' strings are ignored"""
         filters = {"employer_name": "Tech Corp", "seniority": "null"}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert "employer_name = :param_employer_name" in where_clause
         assert "seniority" not in where_clause
         assert len(params) == 1
@@ -306,7 +316,7 @@ class TestBuildWhereClause:
         """Test that empty filters return empty WHERE clause"""
         filters = {}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert where_clause == ""
         assert params == {}
 
@@ -314,7 +324,7 @@ class TestBuildWhereClause:
         """Test that all None filters return empty WHERE clause"""
         filters = {"employer_name": None, "seniority": None}
         where_clause, params = SecureQueryBuilder.build_where_clause(filters)
-        
+
         assert where_clause == ""
         assert params == {}
 
@@ -323,12 +333,12 @@ class TestBuildWhereClause:
 @pytest.mark.parametrize(
     "value,min_val,max_val,should_pass",
     [
-        (1, 1, 100, True),      # Minimum boundary
-        (100, 1, 100, True),    # Maximum boundary
-        (50, 1, 100, True),     # Middle value
-        (0, 1, 100, False),     # Below minimum
-        (101, 1, 100, False),   # Above maximum
-        (-1, 1, 100, False),    # Negative value
+        (1, 1, 100, True),  # Minimum boundary
+        (100, 1, 100, True),  # Maximum boundary
+        (50, 1, 100, True),  # Middle value
+        (0, 1, 100, False),  # Below minimum
+        (101, 1, 100, False),  # Above maximum
+        (-1, 1, 100, False),  # Negative value
     ],
 )
 def test_validate_integer_parametrized(value, min_val, max_val, should_pass):
@@ -362,4 +372,3 @@ def test_sql_injection_attempts_parametrized(sql_injection, description):
     """Parametrized test for various SQL injection attempts"""
     with pytest.raises(ValueError, match="Invalid input detected"):
         SecureQueryBuilder.validate_text_input(sql_injection, "test_field")
-
