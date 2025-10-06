@@ -1,0 +1,53 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements-test.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+        
+    - name: Install test dependencies
+      run: |
+        cd backend
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Load test environment variables
+      run: |
+        cd backend
+        # Export all variables from .env.test to GitHub environment
+        cat .env.test | grep -v '^#' | grep -v '^$' | while IFS='=' read -r key value; do
+          echo "$key=$value" >> $GITHUB_ENV
+        done
+        
+    - name: Run backend tests
+      run: |
+        cd backend
+        pytest tests/ -v --tb=short
+        
+    - name: Test summary
+      if: always()
+      run: |
+        echo "Backend tests completed"
+
