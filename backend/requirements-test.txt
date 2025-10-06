@@ -1,4 +1,5 @@
 # Core dependencies needed for testing
+requests==2.31.0
 fastapi==0.111.0
 pydantic==2.9.1
 pydantic-settings==2.9.1
