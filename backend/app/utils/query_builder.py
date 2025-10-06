@@ -40,7 +40,14 @@ class SecureQueryBuilder:
 
         # Check for SQL injection patterns
         sql_patterns = [
+            # SQL Keywords
             r"(\b(union|select|insert|update|delete|drop|create|alter|exec|execute|script)\b)",
+            # Comment-based injections
+            r"('--)",  # Single quote followed by SQL comment
+            r"('#)",   # Single quote followed by MySQL comment
+            r"('/\*)", # Single quote followed by multi-line comment start
+            r"(--\s)", # SQL comment with space (standalone)
+            r"(#\s)",  # MySQL comment with space (standalone)
             r"(\b(and|or)\b\s+\d+\s*[=<>])",
             r"(\b(and|or)\b\s+\'[^\']*\'\s*[=<>])",
             r"(\b(and|or)\b\s+\"[^\"]*\"\s*[=<>])",
