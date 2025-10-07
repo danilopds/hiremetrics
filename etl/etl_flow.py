@@ -8,9 +8,6 @@ docker commands for reference:
 docker exec -w /app/dbt saas_hiremetrics_etl dbt clean
 docker exec -w /app/dbt saas_hiremetrics_etl dbt deps
 docker exec saas_hiremetrics_etl dbt run --project-dir dbt --profiles-dir dbt
-docker exec saas_hiremetrics_etl dbt run --select dim_publisher --project-dir dbt --profiles-dir dbt
-docker exec saas_hiremetrics_etl dbt run --full-refresh --project-dir dbt --profiles-dir dbt
-docker exec saas_hiremetrics_etl dbt run --full-refresh --select job_dashboard_base --project-dir dbt --profiles-dir dbt
 docker exec saas_hiremetrics_etl python scripts/copy_job_dashboard_base.py
 docker exec saas_hiremetrics_etl python etl_flow.py
 """
