@@ -62,7 +62,7 @@
         <div class="w-full lg:w-1/2 flex justify-center items-center mt-8 lg:mt-0">
           <img
             class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full h-auto object-contain"
-            src="@/assets/img/hero.svg"
+            src="@/assets/img/hero.png"
             alt="Dashboard de vagas remotas de TI"
           >
         </div>

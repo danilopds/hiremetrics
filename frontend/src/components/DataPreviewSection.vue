@@ -1,26 +1,25 @@
 <template>
-  <div class="bg-white py-12">
+  <div class="bg-black py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="lg:text-center mb-10">
-        <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">
-          Dados Reais
+        <h2 class="text-base text-cyan-400 font-semibold tracking-wide uppercase font-mono">
+          <span class="text-cyan-500">//</span> Live Data
         </h2>
-        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Veja os dados que você terá acesso
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+          Dados reais do mercado de TI
         </p>
-        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-          Dados reais extraídos com inteligência artificial e atualizados diariamente. Veja uma
-          prévia do que você encontrará em nossos dashboards.
+        <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto font-mono">
+          Dados reais extraídos com IA e atualizados diariamente. Preview do dataset que você terá acesso.
         </p>
       </div>
 
-      <div class="bg-white shadow-lg border-2 border-gray-300 rounded-lg p-6">
+      <div class="bg-gradient-to-br from-gray-900 to-gray-800 shadow-2xl border border-gray-700 rounded-lg p-6">
         <div class="mb-4 flex justify-between items-center">
-          <h3 class="text-xl font-semibold text-gray-900">
-            📋 Amostra de Dados de Vagas
+          <h3 class="text-xl font-semibold text-white font-mono">
+            <span class="text-cyan-400">$</span> Job Dataset Sample
           </h3>
-          <span class="text-sm text-gray-500">
-            Mostrando {{ visibleRecords }} de {{ totalRecords }} registros
+          <span class="text-sm text-gray-400 font-mono">
+            {{ visibleRecords }} / {{ totalRecords }} records
           </span>
         </div>
 
@@ -29,14 +28,14 @@
           <div class="w-full max-w-md">
             <label
               for="position-select"
-              class="block text-sm font-medium text-gray-700 mb-2"
+              class="block text-sm font-medium text-gray-300 mb-2 font-mono"
             >
-              Cargo
+              <span class="text-cyan-400">&gt;</span> Filtrar por cargo
             </label>
             <select
               id="position-select"
               v-model="selectedPosition"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-3 py-2 bg-gray-800 border border-gray-600 text-gray-200 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 font-mono"
               :disabled="loading"
               @change="fetchData"
             >
@@ -56,7 +55,7 @@
 
         <!-- Period Info -->
         <div class="mb-4 text-center">
-          <p class="text-sm text-gray-600">
+          <p class="text-sm text-gray-400 font-mono">
             📅 Período: Últimos 30 dias ({{ formatDate(dateFrom) }} a {{ formatDate(dateTo) }})
           </p>
         </div>
@@ -66,8 +65,8 @@
           v-if="loading"
           class="flex justify-center items-center py-8"
         >
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
-          <span class="ml-3 text-gray-600">Carregando dados...</span>
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500" />
+          <span class="ml-3 text-gray-300 font-mono">Loading data...</span>
         </div>
 
         <!-- Data Table -->
@@ -75,88 +74,88 @@
           v-else
           class="overflow-x-auto"
         >
-          <div class="max-h-96 overflow-y-auto border border-gray-300 rounded-lg">
-            <table class="min-w-full divide-y divide-gray-300">
-              <thead class="bg-gray-100 sticky top-0">
+          <div class="max-h-96 overflow-y-auto border border-gray-700 rounded-lg">
+            <table class="min-w-full divide-y divide-gray-700">
+              <thead class="bg-gray-800 sticky top-0">
                 <tr>
                   <th
-                    class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider border-r border-gray-300"
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider border-r border-gray-700 font-mono"
                   >
                     Nível
                   </th>
                   <th
-                    class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider border-r border-gray-300"
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider border-r border-gray-700 font-mono"
                   >
                     Remoto
                   </th>
                   <th
-                    class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider border-r border-gray-300"
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider border-r border-gray-700 font-mono"
                   >
                     Título
                   </th>
                   <th
-                    class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider border-r border-gray-300"
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider border-r border-gray-700 font-mono"
                   >
                     Cargo
                   </th>
                   <th
-                    class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider border-r border-gray-300"
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider border-r border-gray-700 font-mono"
                   >
                     Data Publicação
                   </th>
                   <th
-                    class="px-4 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider font-mono"
                   >
                     Tipo
                   </th>
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-300">
+              <tbody class="bg-gray-900 divide-y divide-gray-700">
                 <tr
                   v-for="job in sampleData"
                   :key="job.job_id"
-                  class="hover:bg-gray-50"
+                  class="hover:bg-gray-800 transition-colors"
                 >
                   <td
-                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300"
+                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-200 border-r border-gray-700"
                   >
                     <span
-                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-mono"
                       :class="getSeniorityBadgeClass(job.seniority)"
                     >
                       {{ job.seniority || 'N/A' }}
                     </span>
                   </td>
                   <td
-                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300"
+                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-200 border-r border-gray-700"
                   >
                     <span
-                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-mono"
                       :class="
                         job.job_is_remote
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-blue-100 text-blue-800'
+                          ? 'bg-green-900 text-green-300 border border-green-700'
+                          : 'bg-blue-900 text-blue-300 border border-blue-700'
                       "
                     >
                       {{ job.job_is_remote ? 'Sim' : 'Não' }}
                     </span>
                   </td>
                   <td
-                    class="px-4 py-4 text-sm text-gray-900 max-w-xs truncate border-r border-gray-300"
+                    class="px-4 py-4 text-sm text-gray-200 max-w-xs truncate border-r border-gray-700"
                   >
                     {{ truncateTitle(job.job_title) }}
                   </td>
                   <td
-                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300"
+                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-200 border-r border-gray-700"
                   >
                     {{ job.search_position_query || 'N/A' }}
                   </td>
                   <td
-                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-900 border-r border-gray-300"
+                    class="px-4 py-4 whitespace-nowrap text-sm text-gray-200 border-r border-gray-700 font-mono"
                   >
                     {{ formatDate(job.job_posted_at_date) }}
                   </td>
-                  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-200 font-mono">
                     {{ job.job_employment_type }}
                   </td>
                 </tr>
@@ -168,9 +167,10 @@
         <div class="mt-6 text-center">
           <router-link
             to="/auth/login"
-            class="inline-flex items-center px-6 py-3 border-2 border-blue-600 text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300"
+            class="group relative inline-flex items-center px-8 py-3 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/50"
           >
-            👉 Acesse dados completos agora
+            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+            <span class="relative">Acessar dataset completo →</span>
           </router-link>
         </div>
       </div>
@@ -486,13 +486,13 @@
   const getSeniorityBadgeClass = (seniority) => {
     switch (seniority?.toLowerCase()) {
       case 'junior':
-        return 'bg-blue-100 text-blue-800'
+        return 'bg-blue-900 text-blue-300 border border-blue-700'
       case 'pleno':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'bg-yellow-900 text-yellow-300 border border-yellow-700'
       case 'senior':
-        return 'bg-green-100 text-green-800'
+        return 'bg-green-900 text-green-300 border border-green-700'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-gray-800 text-gray-300 border border-gray-600'
     }
   }
 
