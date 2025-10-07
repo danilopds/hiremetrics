@@ -1,20 +1,24 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-black">
     <NavBar />
 
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full space-y-8">
-        <div>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Crie sua conta
+      <!-- Background Grid Pattern -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
+      
+      <div class="relative max-w-md w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+          <h2 class="mt-6 text-3xl font-extrabold text-white font-mono">
+            <span class="text-cyan-400">$</span> Cadastro
           </h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
-            Ou
+          <p class="mt-2 text-sm text-gray-400 font-mono">
+            Já tem uma conta?
             <router-link
               to="/auth/login"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+              class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors ml-1"
             >
-              entre na sua conta
+              Fazer login
             </router-link>
           </p>
         </div>
@@ -24,11 +28,11 @@
           v-if="registrationCompleted"
           class="text-center space-y-6"
         >
-          <div class="bg-green-50 border border-green-200 rounded-md p-6">
+          <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-green-700 rounded-lg shadow-2xl p-8">
             <div class="flex justify-center mb-4">
-              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-green-900 to-green-800 rounded-full flex items-center justify-center border-2 border-green-500">
                 <svg
-                  class="w-8 h-8 text-green-600"
+                  class="w-8 h-8 text-green-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -42,14 +46,14 @@
                 </svg>
               </div>
             </div>
-            <h3 class="text-lg font-medium text-green-900 mb-2">
+            <h3 class="text-lg font-medium text-white mb-2 font-mono">
               Conta criada com sucesso!
             </h3>
-            <p class="text-sm text-green-700 mb-4">
-              Enviamos um email de verificação para <strong>{{ registeredEmail }}</strong>
+            <p class="text-sm text-gray-300 mb-4 font-mono">
+              Enviamos um email de verificação para <strong class="text-cyan-400">{{ registeredEmail }}</strong>
             </p>
-            <p class="text-sm text-green-600">
-              Clique no link no email para ativar sua conta e começar a usar o HireMetrics.
+            <p class="text-sm text-gray-400 font-mono">
+              Clique no link no email para ativar sua conta.
             </p>
           </div>
 
@@ -58,26 +62,26 @@
             <NButton
               type="primary"
               :loading="resendLoading"
-              class="w-full"
+              class="w-full !bg-gradient-to-r !from-cyan-500 !to-blue-600 hover:!from-cyan-600 hover:!to-blue-700 !border-0 !shadow-lg !shadow-cyan-500/50 !font-mono"
               @click="resendVerificationEmail"
             >
               Reenviar Email de Verificação
             </NButton>
 
-            <div class="text-sm text-gray-600">
+            <div class="text-sm text-gray-400 font-mono">
               Não recebeu o email? Verifique sua caixa de spam.
             </div>
 
-            <div class="pt-4 border-t border-gray-200">
-              <p class="text-sm text-gray-600 mb-3">
+            <div class="pt-4 border-t border-gray-700">
+              <p class="text-sm text-gray-400 mb-3 font-mono">
                 Já verificou seu email?
               </p>
               <NButton
                 type="default"
-                class="w-full"
+                class="w-full !bg-gray-800 !text-gray-200 !border-gray-600 hover:!bg-gray-700 !font-mono"
                 @click="goToLogin"
               >
-                Fazer Login
+                Fazer Login →
               </NButton>
             </div>
           </div>
@@ -86,7 +90,7 @@
         <!-- Success Message (for resend) -->
         <div
           v-if="successMessage"
-          class="bg-green-50 border border-green-200 rounded-md p-4"
+          class="bg-green-900/50 border border-green-700 rounded-md p-4"
         >
           <div class="flex">
             <div class="flex-shrink-0">
@@ -103,7 +107,7 @@
               </svg>
             </div>
             <div class="ml-3">
-              <p class="text-sm font-medium text-green-800">
+              <p class="text-sm font-medium text-green-300 font-mono">
                 {{ successMessage }}
               </p>
             </div>
@@ -113,7 +117,7 @@
         <!-- General Error Message -->
         <div
           v-if="generalError"
-          class="bg-red-50 border border-red-200 rounded-md p-4"
+          class="bg-red-900/50 border border-red-700 rounded-md p-4"
         >
           <div class="flex">
             <div class="flex-shrink-0">
@@ -130,7 +134,7 @@
               </svg>
             </div>
             <div class="ml-3">
-              <p class="text-sm font-medium text-red-800">
+              <p class="text-sm font-medium text-red-300 font-mono">
                 {{ generalError }}
               </p>
               <div
@@ -139,7 +143,7 @@
               >
                 <router-link
                   to="/auth/login"
-                  class="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                  class="text-sm text-cyan-400 hover:text-cyan-300 font-medium font-mono transition-colors"
                 >
                   → Fazer login com este email
                 </router-link>
@@ -148,304 +152,314 @@
           </div>
         </div>
 
-        <form
+        <!-- Form Container -->
+        <div
           v-if="!registrationCompleted"
-          class="mt-8 space-y-6"
-          @submit.prevent="handleSubmit"
+          class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-lg shadow-2xl p-8"
         >
-          <!-- Step 1: Basic Information -->
-          <div
-            v-if="currentStep === 1"
-            class="space-y-4"
+          <form
+            class="space-y-6"
+            @submit.prevent="handleSubmit"
           >
-            <h3 class="text-lg font-medium text-gray-900">
-              Informações Básicas
-            </h3>
+            <!-- Step 1: Basic Information -->
+            <div
+              v-if="currentStep === 1"
+              class="space-y-4"
+            >
+              <h3 class="text-lg font-medium text-white font-mono">
+                <span class="text-cyan-400">01.</span> Informações Básicas
+              </h3>
 
-            <div>
-              <label
-                for="name"
-                class="block text-sm font-medium text-gray-700"
-              >Nome Completo *</label>
-              <NInput
-                id="name"
-                v-model:value="form.name"
-                type="text"
-                placeholder="Digite seu nome completo"
-                :status="errors.name ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.name"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.name }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >
+                  <span class="text-cyan-400">&gt;</span> Nome Completo *
+                </label>
+                <NInput
+                  id="name"
+                  v-model:value="form.name"
+                  type="text"
+                  placeholder="Digite seu nome completo"
+                  :status="errors.name ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.name"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.name }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-medium text-gray-700"
-              >E-mail *</label>
-              <NInput
-                id="email"
-                v-model:value="form.email"
-                type="email"
-                placeholder="seu@email.com"
-                :status="errors.email ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.email"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.email }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >E-mail *</label>
+                <NInput
+                  id="email"
+                  v-model:value="form.email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  :status="errors.email ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.email"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.email }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="password"
-                class="block text-sm font-medium text-gray-700"
-              >Senha *</label>
-              <NInput
-                id="password"
-                v-model:value="form.password"
-                type="password"
-                placeholder="Mínimo 6 caracteres"
-                :status="errors.password ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.password"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.password }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Senha *</label>
+                <NInput
+                  id="password"
+                  v-model:value="form.password"
+                  type="password"
+                  placeholder="Mínimo 6 caracteres"
+                  :status="errors.password ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.password"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.password }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="confirmPassword"
-                class="block text-sm font-medium text-gray-700"
-              >Confirmar Senha *</label>
-              <NInput
-                id="confirmPassword"
-                v-model:value="form.confirmPassword"
-                type="password"
-                placeholder="Confirme sua senha"
-                :status="errors.confirmPassword ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.confirmPassword"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.confirmPassword }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 2: Profile Information -->
-          <div
-            v-if="currentStep === 2"
-            class="space-y-4"
-          >
-            <h3 class="text-lg font-medium text-gray-900">
-              Perfil Profissional
-            </h3>
-            <p class="text-sm text-gray-600">
-              Essas informações nos ajudam a personalizar sua experiência.
-            </p>
-
-            <div>
-              <label
-                for="company"
-                class="block text-sm font-medium text-gray-700"
-              >Empresa *</label>
-              <NInput
-                id="company"
-                v-model:value="form.company"
-                type="text"
-                placeholder="Nome da sua empresa"
-                :status="errors.company ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.company"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.company }}
-              </p>
-            </div>
-
-            <div>
-              <label
-                for="jobTitle"
-                class="block text-sm font-medium text-gray-700"
-              >Cargo *</label>
-              <NInput
-                id="jobTitle"
-                v-model:value="form.jobTitle"
-                type="text"
-                placeholder="Seu cargo atual"
-                :status="errors.jobTitle ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.jobTitle"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.jobTitle }}
-              </p>
-            </div>
-
-            <div>
-              <label
-                for="industry"
-                class="block text-sm font-medium text-gray-700"
-              >Setor *</label>
-              <NSelect
-                v-model:value="form.industry"
-                :options="industryOptions"
-                placeholder="Selecione o setor"
-                :status="errors.industry ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.industry"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.industry }}
-              </p>
-            </div>
-
-            <div>
-              <label
-                for="companySize"
-                class="block text-sm font-medium text-gray-700"
-              >Tamanho da Empresa *</label>
-              <NSelect
-                v-model:value="form.companySize"
-                :options="companySizeOptions"
-                placeholder="Selecione o tamanho"
-                :status="errors.companySize ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.companySize"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.companySize }}
-              </p>
-            </div>
-
-            <div>
-              <label
-                for="roleInCompany"
-                class="block text-sm font-medium text-gray-700"
-              >Seu Papel/Interesse *</label>
-              <NSelect
-                v-model:value="form.roleInCompany"
-                :options="roleOptions"
-                placeholder="Selecione seu papel ou interesse"
-                :status="errors.roleInCompany ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.roleInCompany"
-                class="mt-1 text-sm text-red-600"
-              >
-                {{ errors.roleInCompany }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 3: Terms and Conditions -->
-          <div
-            v-if="currentStep === 3"
-            class="space-y-4"
-          >
-            <h3 class="text-lg font-medium text-gray-900">
-              Termos e Condições
-            </h3>
-
-            <div class="bg-gray-50 p-4 rounded-md">
-              <p class="text-sm text-gray-700 mb-4">
-                Ao criar uma conta, você concorda com nossos Termos de Uso e Política de
-                Privacidade. As preferências de emails podem ser alteradas em seu perfil.
-              </p>
-              <div class="space-y-2">
-                <div class="flex items-start">
-                  <NCheckbox
-                    v-model:checked="form.terms"
-                    class="mt-1"
-                  />
-                  <label class="ml-2 text-sm text-gray-700">
-                    Concordo com os
-                    <router-link
-                      to="/termos-de-uso"
-                      class="text-indigo-600 hover:text-indigo-500"
-                    >Termos de Uso</router-link>
-                    e
-                    <router-link
-                      to="/politica-privacidade"
-                      class="text-indigo-600 hover:text-indigo-500"
-                    >Política de Privacidade</router-link>
-                  </label>
-                </div>
-                <div class="flex items-start">
-                  <NCheckbox
-                    v-model:checked="form.marketing"
-                    class="mt-1"
-                  />
-                  <label class="ml-2 text-sm text-gray-700">
-                    Aceito receber emails sobre novidades
-                  </label>
-                </div>
+              <div>
+                <label
+                  for="confirmPassword"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Confirmar Senha *</label>
+                <NInput
+                  id="confirmPassword"
+                  v-model:value="form.confirmPassword"
+                  type="password"
+                  placeholder="Confirme sua senha"
+                  :status="errors.confirmPassword ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.confirmPassword"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.confirmPassword }}
+                </p>
               </div>
             </div>
 
-            <p
-              v-if="errors.terms"
-              class="text-sm text-red-600"
-            >
-              {{ errors.terms }}
-            </p>
-          </div>
-
-          <!-- Navigation Buttons -->
-          <div class="flex justify-between">
-            <NButton
-              v-if="currentStep > 1"
-              type="default"
-              :disabled="loading"
-              @click="previousStep"
-            >
-              Voltar
-            </NButton>
-            <div v-else />
-
-            <NButton
-              v-if="currentStep < 3"
-              type="primary"
-              :disabled="loading || !canProceedToNextStep"
-              @click="nextStep"
-            >
-              Próximo
-            </NButton>
-            <NButton
-              v-else
-              type="primary"
-              attr-type="submit"
-              :loading="loading"
-            >
-              Criar Conta
-            </NButton>
-          </div>
-
-          <!-- Progress Indicator -->
-          <div class="flex justify-center space-x-2">
+            <!-- Step 2: Profile Information -->
             <div
-              v-for="step in 3"
-              :key="step"
-              class="w-3 h-3 rounded-full"
-              :class="step <= currentStep ? 'bg-indigo-600' : 'bg-gray-300'"
-            />
-          </div>
-        </form>
+              v-if="currentStep === 2"
+              class="space-y-4"
+            >
+              <h3 class="text-lg font-medium text-white font-mono">
+                <span class="text-cyan-400">02.</span> Perfil Profissional
+              </h3>
+              <p class="text-sm text-gray-400 font-mono">
+                Ajude-nos a personalizar sua experiência.
+              </p>
+
+              <div>
+                <label
+                  for="company"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Empresa *</label>
+                <NInput
+                  id="company"
+                  v-model:value="form.company"
+                  type="text"
+                  placeholder="Nome da sua empresa"
+                  :status="errors.company ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.company"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.company }}
+                </p>
+              </div>
+
+              <div>
+                <label
+                  for="jobTitle"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Cargo *</label>
+                <NInput
+                  id="jobTitle"
+                  v-model:value="form.jobTitle"
+                  type="text"
+                  placeholder="Seu cargo atual"
+                  :status="errors.jobTitle ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.jobTitle"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.jobTitle }}
+                </p>
+              </div>
+
+              <div>
+                <label
+                  for="industry"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Setor *</label>
+                <NSelect
+                  v-model:value="form.industry"
+                  :options="industryOptions"
+                  placeholder="Selecione o setor"
+                  :status="errors.industry ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.industry"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.industry }}
+                </p>
+              </div>
+
+              <div>
+                <label
+                  for="companySize"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Tamanho da Empresa *</label>
+                <NSelect
+                  v-model:value="form.companySize"
+                  :options="companySizeOptions"
+                  placeholder="Selecione o tamanho"
+                  :status="errors.companySize ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.companySize"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.companySize }}
+                </p>
+              </div>
+
+              <div>
+                <label
+                  for="roleInCompany"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Seu Papel/Interesse *</label>
+                <NSelect
+                  v-model:value="form.roleInCompany"
+                  :options="roleOptions"
+                  placeholder="Selecione seu papel ou interesse"
+                  :status="errors.roleInCompany ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.roleInCompany"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.roleInCompany }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3: Terms and Conditions -->
+            <div
+              v-if="currentStep === 3"
+              class="space-y-4"
+            >
+              <h3 class="text-lg font-medium text-gray-900">
+                Termos e Condições
+              </h3>
+
+              <div class="bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700 mb-4">
+                  Ao criar uma conta, você concorda com nossos Termos de Uso e Política de
+                  Privacidade. As preferências de emails podem ser alteradas em seu perfil.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex items-start">
+                    <NCheckbox
+                      v-model:checked="form.terms"
+                      class="mt-1"
+                    />
+                    <label class="ml-2 text-sm text-gray-700">
+                      Concordo com os
+                      <router-link
+                        to="/termos-de-uso"
+                        class="text-indigo-600 hover:text-indigo-500"
+                      >Termos de Uso</router-link>
+                      e
+                      <router-link
+                        to="/politica-privacidade"
+                        class="text-indigo-600 hover:text-indigo-500"
+                      >Política de Privacidade</router-link>
+                    </label>
+                  </div>
+                  <div class="flex items-start">
+                    <NCheckbox
+                      v-model:checked="form.marketing"
+                      class="mt-1"
+                    />
+                    <label class="ml-2 text-sm text-gray-700">
+                      Aceito receber emails sobre novidades
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <p
+                v-if="errors.terms"
+                class="text-sm text-red-600"
+              >
+                {{ errors.terms }}
+              </p>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between pt-4">
+              <NButton
+                v-if="currentStep > 1"
+                type="default"
+                :disabled="loading"
+                class="!bg-gray-800 !text-gray-200 !border-gray-600 hover:!bg-gray-700 !font-mono"
+                @click="previousStep"
+              >
+                ← Voltar
+              </NButton>
+              <div v-else />
+
+              <NButton
+                v-if="currentStep < 3"
+                type="primary"
+                :disabled="loading || !canProceedToNextStep"
+                class="!bg-gradient-to-r !from-cyan-500 !to-blue-600 hover:!from-cyan-600 hover:!to-blue-700 !border-0 !shadow-lg !shadow-cyan-500/50 !font-mono"
+                @click="nextStep"
+              >
+                Próximo →
+              </NButton>
+              <NButton
+                v-else
+                type="primary"
+                attr-type="submit"
+                :loading="loading"
+                class="!bg-gradient-to-r !from-cyan-500 !to-blue-600 hover:!from-cyan-600 hover:!to-blue-700 !border-0 !shadow-lg !shadow-cyan-500/50 !font-mono"
+              >
+                Criar Conta →
+              </NButton>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="flex justify-center space-x-2 pt-4">
+              <div
+                v-for="step in 3"
+                :key="step"
+                class="w-3 h-3 rounded-full transition-all duration-300"
+                :class="step <= currentStep ? 'bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/50' : 'bg-gray-700'"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
