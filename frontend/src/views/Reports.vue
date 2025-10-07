@@ -138,14 +138,11 @@
         </div>
       </div>
     </div>
-
-
   </BasePageLayout>
 </template>
 
 <script setup>
   import { ref, onMounted } from 'vue'
-  import { useRouter } from 'vue-router'
   import { useMessage } from 'naive-ui'
   import BasePageLayout from '@/components/common/BasePageLayout.vue'
   import ReportFilterBar from '@/components/filters/ReportFilterBar.vue'
@@ -158,7 +155,6 @@
     name: 'ReportsPage',
   })
 
-  const router = useRouter()
   const message = useMessage()
 
   // State

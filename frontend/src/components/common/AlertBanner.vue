@@ -15,11 +15,13 @@
             />
           </div>
           <div class="ml-2.5">
+            <!-- eslint-disable vue/no-v-html -->
             <p
               class="text-xs font-medium"
               :class="textClass"
               v-html="message"
             />
+            <!-- eslint-enable vue/no-v-html -->
             <!-- Note: v-html is used here for controlled HTML content from parent components -->
           </div>
         </div>
