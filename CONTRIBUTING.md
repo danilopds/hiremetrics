@@ -122,6 +122,15 @@ isort --profile black --filter-files ./etl
 
 ### JavaScript/Vue (Frontend)
 
+Use **ESLint** for code linting:
+
+```bash
+# Lint frontend code
+cd frontend
+npm run lint
+```
+
+**Best practices:**
 - Follow **Vue 3 Composition API** with `<script setup>` syntax
 - Use **ESLint** configuration provided
 - Use **Tailwind CSS** utility classes
@@ -189,14 +198,15 @@ def test_get_top_companies_with_filters(mock_db_session):
     assert result[0]["company_name"] == "Test Corp"
 ```
 
-### Automated Testing (CI/CD)
+### CI/CD Workflows
 
 GitHub Actions workflows in `.github/workflows/` automatically run on push/PR to `main`:
 
 1. **`backend-pytest.yml`** - Runs all backend tests with Python 3.11
-2. **`code-formatting.yml`** - Checks code formatting with Black and isort
+2. **`code-formatting.yml`** - Checks backend/ETL code formatting with Black and isort
+3. **`frontend-lint.yml`** - Runs ESLint checks on frontend code
 
-**All tests and formatting checks must pass before merging.**
+**All tests and linting checks must pass before merging.**
 
 ---
 
