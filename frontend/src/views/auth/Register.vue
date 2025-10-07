@@ -177,81 +177,81 @@
                 >
                   <span class="text-cyan-400">&gt;</span> Nome Completo *
                 </label>
-              <NInput
-                id="name"
-                v-model:value="form.name"
-                type="text"
-                placeholder="Digite seu nome completo"
-                :status="errors.name ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.name"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.name }}
-              </p>
-            </div>
+                <NInput
+                  id="name"
+                  v-model:value="form.name"
+                  type="text"
+                  placeholder="Digite seu nome completo"
+                  :status="errors.name ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.name"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.name }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >E-mail *</label>
-              <NInput
-                id="email"
-                v-model:value="form.email"
-                type="email"
-                placeholder="seu@email.com"
-                :status="errors.email ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.email"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.email }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >E-mail *</label>
+                <NInput
+                  id="email"
+                  v-model:value="form.email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  :status="errors.email ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.email"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.email }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="password"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Senha *</label>
-              <NInput
-                id="password"
-                v-model:value="form.password"
-                type="password"
-                placeholder="Mínimo 6 caracteres"
-                :status="errors.password ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.password"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.password }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Senha *</label>
+                <NInput
+                  id="password"
+                  v-model:value="form.password"
+                  type="password"
+                  placeholder="Mínimo 6 caracteres"
+                  :status="errors.password ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.password"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.password }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="confirmPassword"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Confirmar Senha *</label>
-              <NInput
-                id="confirmPassword"
-                v-model:value="form.confirmPassword"
-                type="password"
-                placeholder="Confirme sua senha"
-                :status="errors.confirmPassword ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.confirmPassword"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.confirmPassword }}
-              </p>
+              <div>
+                <label
+                  for="confirmPassword"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Confirmar Senha *</label>
+                <NInput
+                  id="confirmPassword"
+                  v-model:value="form.confirmPassword"
+                  type="password"
+                  placeholder="Confirme sua senha"
+                  :status="errors.confirmPassword ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.confirmPassword"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.confirmPassword }}
+                </p>
+              </div>
             </div>
-          </div>
 
             <!-- Step 2: Profile Information -->
             <div
@@ -265,156 +265,156 @@
                 Ajude-nos a personalizar sua experiência.
               </p>
 
-            <div>
-              <label
-                for="company"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Empresa *</label>
-              <NInput
-                id="company"
-                v-model:value="form.company"
-                type="text"
-                placeholder="Nome da sua empresa"
-                :status="errors.company ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.company"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.company }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="company"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Empresa *</label>
+                <NInput
+                  id="company"
+                  v-model:value="form.company"
+                  type="text"
+                  placeholder="Nome da sua empresa"
+                  :status="errors.company ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.company"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.company }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="jobTitle"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Cargo *</label>
-              <NInput
-                id="jobTitle"
-                v-model:value="form.jobTitle"
-                type="text"
-                placeholder="Seu cargo atual"
-                :status="errors.jobTitle ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.jobTitle"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.jobTitle }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="jobTitle"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Cargo *</label>
+                <NInput
+                  id="jobTitle"
+                  v-model:value="form.jobTitle"
+                  type="text"
+                  placeholder="Seu cargo atual"
+                  :status="errors.jobTitle ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.jobTitle"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.jobTitle }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="industry"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Setor *</label>
-              <NSelect
-                v-model:value="form.industry"
-                :options="industryOptions"
-                placeholder="Selecione o setor"
-                :status="errors.industry ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.industry"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.industry }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="industry"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Setor *</label>
+                <NSelect
+                  v-model:value="form.industry"
+                  :options="industryOptions"
+                  placeholder="Selecione o setor"
+                  :status="errors.industry ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.industry"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.industry }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="companySize"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Tamanho da Empresa *</label>
-              <NSelect
-                v-model:value="form.companySize"
-                :options="companySizeOptions"
-                placeholder="Selecione o tamanho"
-                :status="errors.companySize ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.companySize"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.companySize }}
-              </p>
-            </div>
+              <div>
+                <label
+                  for="companySize"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Tamanho da Empresa *</label>
+                <NSelect
+                  v-model:value="form.companySize"
+                  :options="companySizeOptions"
+                  placeholder="Selecione o tamanho"
+                  :status="errors.companySize ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.companySize"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.companySize }}
+                </p>
+              </div>
 
-            <div>
-              <label
-                for="roleInCompany"
-                class="block text-sm font-medium text-gray-300 mb-2 font-mono"
-              >Seu Papel/Interesse *</label>
-              <NSelect
-                v-model:value="form.roleInCompany"
-                :options="roleOptions"
-                placeholder="Selecione seu papel ou interesse"
-                :status="errors.roleInCompany ? 'error' : undefined"
-              />
-              <p
-                v-if="errors.roleInCompany"
-                class="mt-1 text-sm text-red-400 font-mono"
-              >
-                {{ errors.roleInCompany }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 3: Terms and Conditions -->
-          <div
-            v-if="currentStep === 3"
-            class="space-y-4"
-          >
-            <h3 class="text-lg font-medium text-gray-900">
-              Termos e Condições
-            </h3>
-
-            <div class="bg-gray-50 p-4 rounded-md">
-              <p class="text-sm text-gray-700 mb-4">
-                Ao criar uma conta, você concorda com nossos Termos de Uso e Política de
-                Privacidade. As preferências de emails podem ser alteradas em seu perfil.
-              </p>
-              <div class="space-y-2">
-                <div class="flex items-start">
-                  <NCheckbox
-                    v-model:checked="form.terms"
-                    class="mt-1"
-                  />
-                  <label class="ml-2 text-sm text-gray-700">
-                    Concordo com os
-                    <router-link
-                      to="/termos-de-uso"
-                      class="text-indigo-600 hover:text-indigo-500"
-                    >Termos de Uso</router-link>
-                    e
-                    <router-link
-                      to="/politica-privacidade"
-                      class="text-indigo-600 hover:text-indigo-500"
-                    >Política de Privacidade</router-link>
-                  </label>
-                </div>
-                <div class="flex items-start">
-                  <NCheckbox
-                    v-model:checked="form.marketing"
-                    class="mt-1"
-                  />
-                  <label class="ml-2 text-sm text-gray-700">
-                    Aceito receber emails sobre novidades
-                  </label>
-                </div>
+              <div>
+                <label
+                  for="roleInCompany"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >Seu Papel/Interesse *</label>
+                <NSelect
+                  v-model:value="form.roleInCompany"
+                  :options="roleOptions"
+                  placeholder="Selecione seu papel ou interesse"
+                  :status="errors.roleInCompany ? 'error' : undefined"
+                />
+                <p
+                  v-if="errors.roleInCompany"
+                  class="mt-1 text-sm text-red-400 font-mono"
+                >
+                  {{ errors.roleInCompany }}
+                </p>
               </div>
             </div>
 
-            <p
-              v-if="errors.terms"
-              class="text-sm text-red-600"
+            <!-- Step 3: Terms and Conditions -->
+            <div
+              v-if="currentStep === 3"
+              class="space-y-4"
             >
-              {{ errors.terms }}
-            </p>
-          </div>
+              <h3 class="text-lg font-medium text-gray-900">
+                Termos e Condições
+              </h3>
+
+              <div class="bg-gray-50 p-4 rounded-md">
+                <p class="text-sm text-gray-700 mb-4">
+                  Ao criar uma conta, você concorda com nossos Termos de Uso e Política de
+                  Privacidade. As preferências de emails podem ser alteradas em seu perfil.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex items-start">
+                    <NCheckbox
+                      v-model:checked="form.terms"
+                      class="mt-1"
+                    />
+                    <label class="ml-2 text-sm text-gray-700">
+                      Concordo com os
+                      <router-link
+                        to="/termos-de-uso"
+                        class="text-indigo-600 hover:text-indigo-500"
+                      >Termos de Uso</router-link>
+                      e
+                      <router-link
+                        to="/politica-privacidade"
+                        class="text-indigo-600 hover:text-indigo-500"
+                      >Política de Privacidade</router-link>
+                    </label>
+                  </div>
+                  <div class="flex items-start">
+                    <NCheckbox
+                      v-model:checked="form.marketing"
+                      class="mt-1"
+                    />
+                    <label class="ml-2 text-sm text-gray-700">
+                      Aceito receber emails sobre novidades
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <p
+                v-if="errors.terms"
+                class="text-sm text-red-600"
+              >
+                {{ errors.terms }}
+              </p>
+            </div>
 
             <!-- Navigation Buttons -->
             <div class="flex justify-between pt-4">

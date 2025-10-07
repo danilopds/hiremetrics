@@ -164,7 +164,9 @@
                   </svg>
                 </div>
                 <div class="ml-3">
-                  <p class="text-sm text-red-300 font-mono">{{ error }}</p>
+                  <p class="text-sm text-red-300 font-mono">
+                    {{ error }}
+                  </p>
                   <div
                     v-if="showResendVerification"
                     class="mt-3"

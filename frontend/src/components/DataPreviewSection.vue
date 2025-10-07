@@ -169,7 +169,7 @@
             to="/auth/login"
             class="group relative inline-flex items-center px-8 py-3 overflow-hidden font-mono font-medium tracking-tighter text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg hover:scale-105 transition-transform duration-300 shadow-lg shadow-cyan-500/50"
           >
-            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+            <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10" />
             <span class="relative">Acessar dataset completo →</span>
           </router-link>
         </div>
