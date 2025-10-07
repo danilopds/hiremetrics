@@ -1,161 +1,192 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-black">
     <NavBar />
 
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full space-y-8">
-        <div>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Acessar Plataforma
+      <!-- Background Grid Pattern -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
+      
+      <div class="relative max-w-md w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+          <h2 class="mt-6 text-3xl font-extrabold text-white font-mono">
+            <span class="text-cyan-400">$</span> Login
           </h2>
+          <p class="mt-2 text-sm text-gray-400 font-mono">
+            Acesse sua dashboard de desenvolvedor
+          </p>
         </div>
 
-        <!-- Google OAuth Button - Now at the top -->
-        <div class="mt-8">
-          <button
-            type="button"
-            :disabled="googleLoading"
-            class="group relative w-full flex justify-center py-3 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md transition-all duration-200 hover:shadow-lg"
-            @click="handleGoogleLogin"
-          >
-            <svg
-              v-if="!googleLoading"
-              class="w-6 h-6 mr-2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="#4285F4"
-                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-              />
-              <path
-                fill="#34A853"
-                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-              />
-              <path
-                fill="#FBBC05"
-                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-              />
-              <path
-                fill="#EA4335"
-                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-              />
-            </svg>
-            <span
-              v-if="googleLoading"
-              class="text-base"
-            >Entrando com Google...</span>
-            <span
-              v-else
-              class="text-base font-medium"
-            >Entrar com Google</span>
-          </button>
-        </div>
-
-        <!-- Divider -->
-        <div class="relative">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-gray-300" />
-          </div>
-          <div class="relative flex justify-center text-sm">
-            <span class="px-2 bg-gray-50 text-gray-500">Ou entre com email</span>
-          </div>
-        </div>
-
-        <form
-          class="space-y-6"
-          @submit.prevent="handleSubmit"
-        >
-          <div class="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label
-                for="email"
-                class="sr-only"
-              >Endereço de email</label>
-              <input
-                id="email"
-                v-model="formData.email"
-                name="email"
-                type="email"
-                required
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Endereço de email"
-              >
-            </div>
-            <div>
-              <label
-                for="password"
-                class="sr-only"
-              >Senha</label>
-              <input
-                id="password"
-                v-model="formData.password"
-                name="password"
-                type="password"
-                required
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Senha"
-              >
-            </div>
-          </div>
-
-          <div class="flex items-center justify-end">
-            <div class="text-sm">
-              <router-link
-                to="/auth/forgot-password"
-                class="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Esqueceu sua senha?
-              </router-link>
-            </div>
-          </div>
-
-          <div class="mt-4">
+        <!-- Card Container -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 rounded-lg shadow-2xl p-8">
+          <!-- Google OAuth Button -->
+          <div>
             <button
-              type="submit"
-              :disabled="loading"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              type="button"
+              :disabled="googleLoading"
+              class="group relative w-full flex items-center justify-center py-3 px-4 border border-gray-600 text-sm font-medium rounded-md text-gray-200 bg-gray-800 hover:bg-gray-700 hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-gray-900 shadow-md transition-all duration-200 font-mono"
+              @click="handleGoogleLogin"
             >
-              <span v-if="loading">Entrando...</span>
-              <span v-else>Entrar</span>
+              <svg
+                v-if="!googleLoading"
+                class="w-5 h-5 mr-2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                />
+              </svg>
+              <span v-if="googleLoading">Entrando com Google...</span>
+              <span v-else>Continuar com Google</span>
             </button>
           </div>
 
-          <div>
-            <p class="mt-2 text-center text-sm text-gray-600">
-              Ou
-              <router-link
-                to="/auth/register"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                crie uma nova conta
-              </router-link>
-            </p>
-          </div>
-
-          <div
-            v-if="error"
-            class="text-red-500 text-sm text-center"
-          >
-            <p>{{ error }}</p>
-            <div
-              v-if="showResendVerification"
-              class="mt-3"
-            >
-              <p class="text-gray-600 text-xs mb-2">
-                Não recebeu o email de verificação?
-              </p>
-              <button
-                type="button"
-                :disabled="resendLoading"
-                class="text-blue-600 hover:text-blue-500 text-sm font-medium"
-                @click="handleResendVerification"
-              >
-                <span v-if="resendLoading">Enviando...</span>
-                <span v-else>Reenviar email de verificação</span>
-              </button>
+          <!-- Divider -->
+          <div class="relative my-6">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-700" />
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-gray-800 text-gray-400 font-mono">
+                <span class="text-cyan-500">//</span> ou use email
+              </span>
             </div>
           </div>
-        </form>
+
+          <!-- Login Form -->
+          <form
+            class="space-y-5"
+            @submit.prevent="handleSubmit"
+          >
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >
+                  <span class="text-cyan-400">&gt;</span> Email
+                </label>
+                <input
+                  id="email"
+                  v-model="formData.email"
+                  name="email"
+                  type="email"
+                  required
+                  class="appearance-none block w-full px-4 py-3 border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors font-mono"
+                  placeholder="seu@email.com"
+                >
+              </div>
+              <div>
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-300 mb-2 font-mono"
+                >
+                  <span class="text-cyan-400">&gt;</span> Senha
+                </label>
+                <input
+                  id="password"
+                  v-model="formData.password"
+                  name="password"
+                  type="password"
+                  required
+                  class="appearance-none block w-full px-4 py-3 border border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors font-mono"
+                  placeholder="••••••••"
+                >
+              </div>
+            </div>
+
+            <div class="flex items-center justify-end">
+              <div class="text-sm">
+                <router-link
+                  to="/auth/forgot-password"
+                  class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors font-mono"
+                >
+                  Esqueceu sua senha?
+                </router-link>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                :disabled="loading"
+                class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-gray-900 shadow-lg shadow-cyan-500/50 transition-all duration-200 font-mono disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span v-if="loading">Entrando...</span>
+                <span v-else>Entrar →</span>
+              </button>
+            </div>
+
+            <div class="text-center">
+              <p class="text-sm text-gray-400 font-mono">
+                Não tem uma conta?
+                <router-link
+                  to="/auth/register"
+                  class="font-medium text-cyan-400 hover:text-cyan-300 transition-colors ml-1"
+                >
+                  Cadastre-se
+                </router-link>
+              </p>
+            </div>
+
+            <!-- Error Messages -->
+            <div
+              v-if="error"
+              class="rounded-md bg-red-900/50 border border-red-700 p-4"
+            >
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg
+                    class="h-5 w-5 text-red-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-red-300 font-mono">{{ error }}</p>
+                  <div
+                    v-if="showResendVerification"
+                    class="mt-3"
+                  >
+                    <p class="text-gray-400 text-xs mb-2 font-mono">
+                      Não recebeu o email de verificação?
+                    </p>
+                    <button
+                      type="button"
+                      :disabled="resendLoading"
+                      class="text-cyan-400 hover:text-cyan-300 text-sm font-medium font-mono transition-colors"
+                      @click="handleResendVerification"
+                    >
+                      <span v-if="resendLoading">Enviando...</span>
+                      <span v-else>Reenviar email de verificação →</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
