@@ -77,10 +77,8 @@
 
 <script setup>
   import { ref, onMounted } from 'vue'
-  import { useAuthStore } from '@/stores/auth'
 
   const showPopup = ref(false)
-  const authStore = useAuthStore()
 
   const closePopup = () => {
     showPopup.value = false
