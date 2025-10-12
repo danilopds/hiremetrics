@@ -12,7 +12,7 @@ docker exec saas_hiremetrics_etl python scripts/copy_job_dashboard_base.py
 docker exec saas_hiremetrics_etl python etl_flow.py
 
 - rebuild container (force refresh env. variables)
-docker-compose up -d --build hiremetrics_elt
+docker-compose up -d --build hiremetrics_etl
 """
 
 import logging
