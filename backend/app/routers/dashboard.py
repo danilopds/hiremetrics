@@ -32,24 +32,16 @@ def get_job_dashboard_base(
     ),
     job_city: Optional[str] = Query(None, description="Filter by job city"),
     job_state: Optional[str] = Query(None, description="Filter by job state"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get job dashboard data with comprehensive filtering"""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 10000
-        )
-        validated_offset = SecureQueryBuilder.validate_integer_input(
-            offset, "offset", 0
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 10000)
+        validated_offset = SecureQueryBuilder.validate_integer_input(offset, "offset", 0)
 
         # Build secure filters
         filters = {}
@@ -67,9 +59,7 @@ def get_job_dashboard_base(
             validated_date_from = SecureQueryBuilder.validate_date_input(
                 job_posted_at_date_from, "job_posted_at_date_from"
             )
-            filters["job_posted_at_date >= :job_posted_at_date_from"] = (
-                validated_date_from
-            )
+            filters["job_posted_at_date >= :job_posted_at_date_from"] = validated_date_from
             params["job_posted_at_date_from"] = validated_date_from
 
         if job_posted_at_date_to not in (None, "", "null"):
@@ -81,16 +71,12 @@ def get_job_dashboard_base(
 
         # Validate text inputs
         if job_city not in (None, "", "null"):
-            validated_city = SecureQueryBuilder.validate_text_input(
-                job_city, "job_city"
-            )
+            validated_city = SecureQueryBuilder.validate_text_input(job_city, "job_city")
             filters["job_city ILIKE :job_city"] = validated_city
             params["job_city"] = f"%{validated_city}%"
 
         if job_state not in (None, "", "null"):
-            validated_state = SecureQueryBuilder.validate_text_input(
-                job_state, "job_state"
-            )
+            validated_state = SecureQueryBuilder.validate_text_input(job_state, "job_state")
             filters["job_state ILIKE :job_state"] = validated_state
             params["job_state"] = f"%{validated_state}%"
 
@@ -113,9 +99,7 @@ def get_job_dashboard_base(
             validated_position = SecureQueryBuilder.validate_text_input(
                 search_position_query, "search_position_query"
             )
-            filters["search_position_query = :search_position_query"] = (
-                validated_position
-            )
+            filters["search_position_query = :search_position_query"] = validated_position
             params["search_position_query"] = validated_position
 
         # Build secure WHERE clause
@@ -153,17 +137,13 @@ def get_top_skills(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get top skills with optional filters"""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 1000
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 1000)
 
         # Build secure filters
         filters = {}
@@ -174,9 +154,7 @@ def get_top_skills(
             validated_date_from = SecureQueryBuilder.validate_date_input(
                 job_posted_at_date_from, "job_posted_at_date_from"
             )
-            filters["job_posted_at_date >= :job_posted_at_date_from"] = (
-                validated_date_from
-            )
+            filters["job_posted_at_date >= :job_posted_at_date_from"] = validated_date_from
             params["job_posted_at_date_from"] = validated_date_from
 
         if job_posted_at_date_to not in (None, "", "null"):
@@ -188,9 +166,7 @@ def get_top_skills(
 
         # Validate text inputs
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters["seniority = :seniority"] = validated_seniority
             params["seniority"] = validated_seniority
 
@@ -198,9 +174,7 @@ def get_top_skills(
             validated_position = SecureQueryBuilder.validate_text_input(
                 search_position_query, "search_position_query"
             )
-            filters["search_position_query = :search_position_query"] = (
-                validated_position
-            )
+            filters["search_position_query = :search_position_query"] = validated_position
             params["search_position_query"] = validated_position
 
         # Build secure WHERE clause
@@ -276,17 +250,13 @@ def get_skills_trend(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get skills trend data over time"""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 100
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 100)
 
         # Build secure filters
         filters = {}
@@ -297,9 +267,7 @@ def get_skills_trend(
             validated_date_from = SecureQueryBuilder.validate_date_input(
                 job_posted_at_date_from, "job_posted_at_date_from"
             )
-            filters["job_posted_at_date >= :job_posted_at_date_from"] = (
-                validated_date_from
-            )
+            filters["job_posted_at_date >= :job_posted_at_date_from"] = validated_date_from
             params["job_posted_at_date_from"] = validated_date_from
 
         if job_posted_at_date_to not in (None, "", "null"):
@@ -311,9 +279,7 @@ def get_skills_trend(
 
         # Validate text inputs
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters["seniority = :seniority"] = validated_seniority
             params["seniority"] = validated_seniority
 
@@ -321,9 +287,7 @@ def get_skills_trend(
             validated_position = SecureQueryBuilder.validate_text_input(
                 search_position_query, "search_position_query"
             )
-            filters["search_position_query = :search_position_query"] = (
-                validated_position
-            )
+            filters["search_position_query = :search_position_query"] = validated_position
             params["search_position_query"] = validated_position
 
         # Extract and validate skills from query parameters
@@ -359,24 +323,18 @@ def get_skills_trend(
             valid_skills = []
             for skill in skills:
                 if skill and skill.strip():
-                    validated_skill = SecureQueryBuilder.validate_text_input(
-                        skill, "skill"
-                    )
+                    validated_skill = SecureQueryBuilder.validate_text_input(skill, "skill")
                     valid_skills.append(validated_skill)
 
             if valid_skills:
                 # Create dynamic placeholders for IN clause
-                skill_placeholders = ", ".join(
-                    [f":skill_{i}" for i in range(len(valid_skills))]
-                )
+                skill_placeholders = ", ".join([f":skill_{i}" for i in range(len(valid_skills))])
                 filters[f"skill IN ({skill_placeholders})"] = valid_skills
                 for i, skill in enumerate(valid_skills):
                     params[f"skill_{i}"] = skill
         else:
             # Get top N skills if not provided
-            where_clause_for_top = (
-                f"WHERE {' AND '.join(filters.keys())}" if filters else ""
-            )
+            where_clause_for_top = f"WHERE {' AND '.join(filters.keys())}" if filters else ""
             top_skills_query = text(
                 f"""
                 SELECT skill
@@ -393,9 +351,7 @@ def get_skills_trend(
 
             if top_skills:
                 # Create dynamic placeholders for IN clause
-                skill_placeholders = ", ".join(
-                    [f":skill_{i}" for i in range(len(top_skills))]
-                )
+                skill_placeholders = ", ".join([f":skill_{i}" for i in range(len(top_skills))])
                 filters[f"skill IN ({skill_placeholders})"] = top_skills
                 for i, skill in enumerate(top_skills):
                     params[f"skill_{i}"] = skill
@@ -438,9 +394,7 @@ def get_skills_trend(
 @router.get("/available-skills", response_model=list[str])
 @cache_result(ttl=600, key_prefix="available_skills")  # Cache for 10 minutes
 def get_available_skills(
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get list of all available skills from the database."""
@@ -454,9 +408,7 @@ def get_available_skills(
             validated_position = SecureQueryBuilder.validate_text_input(
                 search_position_query, "search_position_query"
             )
-            filters["search_position_query = :search_position_query"] = (
-                validated_position
-            )
+            filters["search_position_query = :search_position_query"] = validated_position
             params["search_position_query"] = validated_position
 
         # Build secure WHERE clause
@@ -486,9 +438,7 @@ def get_available_skills(
 @router.get("/available-seniority-levels", response_model=list[str])
 @cache_result(ttl=600, key_prefix="available_seniority")  # Cache for 10 minutes
 def get_available_seniority_levels(
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get list of all available seniority levels from the database."""
@@ -554,9 +504,7 @@ def get_available_positions(db: Session = Depends(get_db)):
 
 @router.get("/locations", response_model=list[dict])
 def get_filtered_locations(
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     job_posted_at_date_from: Optional[str] = Query(
         None, description="Filter by job posted date from (YYYY-MM-DD)"
     ),
@@ -611,9 +559,7 @@ def get_filtered_locations(
         query = text(full_query)
 
         result = db.execute(query, params)
-        locations = [
-            {"title": row[0], "state": row[1]} for row in result if row[0] and row[1]
-        ]
+        locations = [{"title": row[0], "state": row[1]} for row in result if row[0] and row[1]]
         return locations
 
     except ValueError as e:
@@ -625,9 +571,7 @@ def get_filtered_locations(
 @router.get("/available-publishers", response_model=list[str])
 @cache_result(ttl=600, key_prefix="available_publishers")  # Cache for 10 minutes
 def get_available_publishers(
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get list of all available publishers from the database."""
@@ -676,9 +620,7 @@ def get_available_publishers(
 @router.get("/available-companies", response_model=list[str])
 @cache_result(ttl=600, key_prefix="available_companies")  # Cache for 10 minutes
 def get_available_companies(
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get list of all available companies from the database."""
@@ -772,24 +714,18 @@ def get_job_locations_geo(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     job_city: Optional[str] = Query(None, description="Filter by city"),
     job_state: Optional[str] = Query(None, description="Filter by state"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     limit: int = Query(500, ge=1, le=1000),
     db: Session = Depends(get_db),
 ):
     """Get geographic job location data with comprehensive filtering"""
     try:
         # Validate limit parameter
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 1000
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 1000)
 
         filters = []
         params = {"limit": validated_limit}
@@ -818,23 +754,17 @@ def get_job_locations_geo(
             params["employer_name"] = validated_employer
 
         if seniority:
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
         if job_city:
-            validated_city = SecureQueryBuilder.validate_text_input(
-                job_city, "job_city"
-            )
+            validated_city = SecureQueryBuilder.validate_text_input(job_city, "job_city")
             filters.append("job_city = :job_city")
             params["job_city"] = validated_city
 
         if job_state:
-            validated_state = SecureQueryBuilder.validate_text_input(
-                job_state, "job_state"
-            )
+            validated_state = SecureQueryBuilder.validate_text_input(job_state, "job_state")
             filters.append("job_state = :job_state")
             params["job_state"] = validated_state
 
@@ -902,13 +832,9 @@ def get_employment_type_distribution(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get employment type distribution."""
@@ -941,9 +867,7 @@ def get_employment_type_distribution(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -970,9 +894,7 @@ def get_employment_type_distribution(
         # If filtering by a specific company, simplify the query
         if employer_name not in (None, "", "null"):
             # Build additional filters excluding employer_name
-            additional_filters = [
-                f for f in filters if not f.startswith("employer_name")
-            ]
+            additional_filters = [f for f in filters if not f.startswith("employer_name")]
             additional_where = (
                 f"AND {' AND '.join(additional_filters)}" if additional_filters else ""
             )

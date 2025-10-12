@@ -35,21 +35,15 @@ def get_top_companies(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get top companies by job count."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 100
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 100)
 
         # Build secure filters
         filters = []
@@ -79,9 +73,7 @@ def get_top_companies(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -166,21 +158,15 @@ def get_companies_seniority_distribution(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get seniority distribution by top companies."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 50
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 50)
 
         # Build secure filters
         filters = []
@@ -210,9 +196,7 @@ def get_companies_seniority_distribution(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -242,9 +226,7 @@ def get_companies_seniority_distribution(
         # If filtering by a specific company, simplify the query
         if employer_name not in (None, "", "null"):
             # Build additional filters excluding employer_name
-            additional_filters = [
-                f for f in filters if not f.startswith("employer_name")
-            ]
+            additional_filters = [f for f in filters if not f.startswith("employer_name")]
             additional_where = (
                 f"AND {' AND '.join(additional_filters)}" if additional_filters else ""
             )
@@ -346,21 +328,15 @@ def get_companies_remote_percentage(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get remote job percentage by company."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 100
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 100)
 
         # Build secure filters
         filters = []
@@ -390,9 +366,7 @@ def get_companies_remote_percentage(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -456,9 +430,7 @@ def get_companies_remote_percentage(
                 ORDER BY remote_percentage DESC, total_jobs DESC
                 LIMIT :limit
                 """
-                full_query = base_query.format(
-                    platform_cte=platform_cte, where_clause=where_clause
-                )
+                full_query = base_query.format(platform_cte=platform_cte, where_clause=where_clause)
             else:
                 # Modified logic: Show companies with remote jobs or companies with at least 2 jobs
                 base_query = """
@@ -480,9 +452,7 @@ def get_companies_remote_percentage(
                 ORDER BY remote_percentage DESC, total_jobs DESC
                 LIMIT :limit
                 """
-                full_query = base_query.format(
-                    platform_cte=platform_cte, where_clause=where_clause
-                )
+                full_query = base_query.format(platform_cte=platform_cte, where_clause=where_clause)
         else:
             # No job platforms to exclude, use simple approach
             if (
@@ -547,21 +517,15 @@ def get_companies_jobs_timeline(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get jobs timeline by top companies."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 20
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 20)
 
         # Build secure filters
         filters = []
@@ -591,9 +555,7 @@ def get_companies_jobs_timeline(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -623,9 +585,7 @@ def get_companies_jobs_timeline(
         # If filtering by a specific company, simplify the query
         if employer_name not in (None, "", "null"):
             # Build additional filters excluding employer_name
-            additional_filters = [
-                f for f in filters if not f.startswith("employer_name")
-            ]
+            additional_filters = [f for f in filters if not f.startswith("employer_name")]
             additional_where = (
                 f"AND {' AND '.join(additional_filters)}" if additional_filters else ""
             )
@@ -728,21 +688,15 @@ def get_companies_top_skills(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get top skills by company with word cloud format data."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 50
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 50)
         validated_skills_limit = SecureQueryBuilder.validate_integer_input(
             skills_limit, "skills_limit", 5, 50
         )
@@ -775,9 +729,7 @@ def get_companies_top_skills(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -804,9 +756,7 @@ def get_companies_top_skills(
         # If filtering by a specific company, simplify the query
         if employer_name not in (None, "", "null"):
             # Build additional filters excluding employer_name
-            additional_filters = [
-                f for f in filters if not f.startswith("employer_name")
-            ]
+            additional_filters = [f for f in filters if not f.startswith("employer_name")]
             additional_where = (
                 f"AND {' AND '.join(additional_filters)}" if additional_filters else ""
             )
@@ -879,13 +829,9 @@ def get_companies_kpis(
         None, description="Filter by job posted date to (YYYY-MM-DD)"
     ),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get KPIs for companies: total job postings, % remote jobs, average skills per job."""
@@ -918,9 +864,7 @@ def get_companies_kpis(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -980,9 +924,7 @@ def get_companies_kpis(
             ) job_skill_counts
         """
         additional_where = f"AND {' AND '.join(filters)}" if filters else ""
-        avg_skills_query = text(
-            avg_skills_base_query.format(additional_where=additional_where)
-        )
+        avg_skills_query = text(avg_skills_base_query.format(additional_where=additional_where))
 
         # Count of distinct companies
         distinct_companies_base_query = """
@@ -996,24 +938,16 @@ def get_companies_kpis(
         )
 
         total_jobs_result = db.execute(total_jobs_query, params).fetchone()
-        remote_percentage_result = db.execute(
-            remote_percentage_query, params
-        ).fetchone()
+        remote_percentage_result = db.execute(remote_percentage_query, params).fetchone()
         avg_skills_result = db.execute(avg_skills_query, params).fetchone()
-        distinct_companies_result = db.execute(
-            distinct_companies_query, params
-        ).fetchone()
+        distinct_companies_result = db.execute(distinct_companies_query, params).fetchone()
 
         return {
             "total_jobs": total_jobs_result[0] if total_jobs_result else 0,
             "remote_percentage": (
-                float(remote_percentage_result[0] or 0)
-                if remote_percentage_result
-                else 0
+                float(remote_percentage_result[0] or 0) if remote_percentage_result else 0
             ),
-            "avg_skills_per_job": (
-                float(avg_skills_result[0] or 0) if avg_skills_result else 0
-            ),
+            "avg_skills_per_job": (float(avg_skills_result[0] or 0) if avg_skills_result else 0),
             "distinct_companies": (
                 distinct_companies_result[0] if distinct_companies_result else 0
             ),

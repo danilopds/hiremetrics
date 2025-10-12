@@ -46,7 +46,8 @@
 - **Docker & Docker Compose**
 - **Node.js** (v16 or higher)
 - **npm** (v7 or higher)
-- **Python** (3.8 or higher)
+- **Python** (3.10 or higher)
+- **uv** - Fast Python package manager ([Install uv](https://docs.astral.sh/uv/getting-started/installation/))
 
 ### Installation
 
@@ -93,6 +94,7 @@
 | **Backend** | FastAPI + SQLAlchemy | High-performance API with ORM |
 | **Database** | PostgreSQL + DuckDB | Production data + analytical processing |
 | **ETL** | dbt + Prefect | Data transformation and orchestration |
+| **Package Management** | uv + npm | Ultra-fast Python & JavaScript dependency management |
 | **Infrastructure** | Docker + Docker Compose | Containerized deployment |
 
 ### Design

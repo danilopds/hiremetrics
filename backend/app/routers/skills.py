@@ -21,15 +21,11 @@ async def get_jobs_by_skills(
     skills: str = Query(..., description="Comma-separated list of skills to filter by"),
     job_posted_at_date_from: Optional[str] = Query(None),
     job_posted_at_date_to: Optional[str] = Query(None),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     employer_names: Optional[str] = Query(
         None, description="Comma-separated list of employer names"
     ),
-    publishers: Optional[str] = Query(
-        None, description="Comma-separated list of publishers"
-    ),
+    publishers: Optional[str] = Query(None, description="Comma-separated list of publishers"),
     seniority_levels: Optional[str] = Query(
         None, description="Comma-separated list of seniority levels"
     ),
@@ -50,9 +46,7 @@ async def get_jobs_by_skills(
     """
     try:
         # Validate limit parameter
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 50000
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 50000)
 
         # Parse and validate comma-separated parameters
         filters = CSVExportFilters(

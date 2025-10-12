@@ -179,9 +179,7 @@ class SecureQueryBuilder:
         return result
 
     @staticmethod
-    def validate_list_input(
-        value: Any, field_name: str, max_items: int = 100
-    ) -> List[str]:
+    def validate_list_input(value: Any, field_name: str, max_items: int = 100) -> List[str]:
         """Validate list input"""
         if isinstance(value, str):
             # Handle comma-separated string

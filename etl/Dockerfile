@@ -9,9 +9,17 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first to leverage Docker cache
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Enable system Python (no virtual environment needed in Docker)
+ENV UV_SYSTEM_PYTHON=1
+
+# Copy dependency files first to leverage Docker cache
+COPY pyproject.toml ./
+
+# Install dependencies directly to system Python (much faster, no venv overhead)
+RUN uv pip install --no-cache .
 
 # Copy the rest of the application
 COPY . .

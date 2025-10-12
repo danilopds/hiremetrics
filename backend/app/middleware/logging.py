@@ -63,9 +63,7 @@ async def user_journey_logger(request: Request, call_next):
     else:
         # Try to get user ID from cached token (for consistent tracking across requests)
         cached_data = client_token_cache[client_ip]
-        if (
-            cached_data["token"] and time.time() - cached_data["timestamp"] < 3600
-        ):  # 1 hour TTL
+        if cached_data["token"] and time.time() - cached_data["timestamp"] < 3600:  # 1 hour TTL
             token = cached_data["token"]
             try:
                 # Extract payload from JWT without verification

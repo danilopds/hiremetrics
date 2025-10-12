@@ -5,9 +5,7 @@ import duckdb
 duckdb_db_name = os.getenv("MOTHERDUCK_DATABASE")
 duckdb_token = os.getenv("MOTHERDUCK_TOKEN")
 if not duckdb_db_name or not duckdb_token:
-    raise ValueError(
-        "MOTHERDUCK_DATABASE and MOTHERDUCK_TOKEN environment variables are required"
-    )
+    raise ValueError("MOTHERDUCK_DATABASE and MOTHERDUCK_TOKEN environment variables are required")
 
 
 def test_motherduck_connection():

@@ -11,6 +11,7 @@ Tests input validation methods to ensure:
 from datetime import datetime
 
 import pytest
+
 from app.utils.query_builder import SecureQueryBuilder
 
 
@@ -161,9 +162,7 @@ class TestValidateTextInput:
 
     def test_validate_text_input_with_special_chars(self):
         """Test validation with allowed special characters"""
-        result = SecureQueryBuilder.validate_text_input(
-            "O'Reilly & Associates", "company"
-        )
+        result = SecureQueryBuilder.validate_text_input("O'Reilly & Associates", "company")
         assert result == "O'Reilly & Associates"
 
     def test_validate_text_input_with_unicode(self):
@@ -179,16 +178,12 @@ class TestValidateTextInput:
     def test_validate_text_input_sql_injection_drop_table(self):
         """Test that SQL DROP TABLE injection is blocked"""
         with pytest.raises(ValueError, match="Invalid input detected"):
-            SecureQueryBuilder.validate_text_input(
-                "'; DROP TABLE companies; --", "company"
-            )
+            SecureQueryBuilder.validate_text_input("'; DROP TABLE companies; --", "company")
 
     def test_validate_text_input_sql_injection_union_select(self):
         """Test that UNION SELECT injection is blocked"""
         with pytest.raises(ValueError, match="Invalid input detected"):
-            SecureQueryBuilder.validate_text_input(
-                "' UNION SELECT * FROM users --", "company"
-            )
+            SecureQueryBuilder.validate_text_input("' UNION SELECT * FROM users --", "company")
 
     def test_validate_text_input_sql_injection_or_1_equals_1(self):
         """Test that OR 1=1 injection is blocked"""
@@ -217,23 +212,17 @@ class TestValidateListInput:
 
     def test_validate_list_input_with_list(self):
         """Test validation with actual list"""
-        result = SecureQueryBuilder.validate_list_input(
-            ["skill1", "skill2", "skill3"], "skills"
-        )
+        result = SecureQueryBuilder.validate_list_input(["skill1", "skill2", "skill3"], "skills")
         assert result == ["skill1", "skill2", "skill3"]
 
     def test_validate_list_input_with_comma_separated_string(self):
         """Test validation with comma-separated string"""
-        result = SecureQueryBuilder.validate_list_input(
-            "skill1,skill2,skill3", "skills"
-        )
+        result = SecureQueryBuilder.validate_list_input("skill1,skill2,skill3", "skills")
         assert result == ["skill1", "skill2", "skill3"]
 
     def test_validate_list_input_strips_whitespace(self):
         """Test that whitespace around items is stripped"""
-        result = SecureQueryBuilder.validate_list_input(
-            " skill1 , skill2 , skill3 ", "skills"
-        )
+        result = SecureQueryBuilder.validate_list_input(" skill1 , skill2 , skill3 ", "skills")
         assert result == ["skill1", "skill2", "skill3"]
 
     def test_validate_list_input_exceeds_max_items(self):
@@ -245,15 +234,11 @@ class TestValidateListInput:
     def test_validate_list_input_with_sql_injection_in_item(self):
         """Test that SQL injection in list items is blocked"""
         with pytest.raises(ValueError, match="Invalid input detected"):
-            SecureQueryBuilder.validate_list_input(
-                ["skill1", "'; DROP TABLE skills; --"], "skills"
-            )
+            SecureQueryBuilder.validate_list_input(["skill1", "'; DROP TABLE skills; --"], "skills")
 
     def test_validate_list_input_invalid_type(self):
         """Test that invalid type raises ValueError"""
-        with pytest.raises(
-            ValueError, match="must be a list or comma-separated string"
-        ):
+        with pytest.raises(ValueError, match="must be a list or comma-separated string"):
             SecureQueryBuilder.validate_list_input(123, "skills")
 
     def test_validate_list_input_with_non_string_items(self):
@@ -344,15 +329,11 @@ class TestBuildWhereClause:
 def test_validate_integer_parametrized(value, min_val, max_val, should_pass):
     """Parametrized test for integer validation with various boundary conditions"""
     if should_pass:
-        result = SecureQueryBuilder.validate_integer_input(
-            value, "test_field", min_val, max_val
-        )
+        result = SecureQueryBuilder.validate_integer_input(value, "test_field", min_val, max_val)
         assert result == value
     else:
         with pytest.raises(ValueError):
-            SecureQueryBuilder.validate_integer_input(
-                value, "test_field", min_val, max_val
-            )
+            SecureQueryBuilder.validate_integer_input(value, "test_field", min_val, max_val)
 
 
 @pytest.mark.parametrize(

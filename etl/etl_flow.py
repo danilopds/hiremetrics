@@ -10,6 +10,9 @@ docker exec -w /app/dbt saas_hiremetrics_etl dbt deps
 docker exec saas_hiremetrics_etl dbt run --project-dir dbt --profiles-dir dbt
 docker exec saas_hiremetrics_etl python scripts/copy_job_dashboard_base.py
 docker exec saas_hiremetrics_etl python etl_flow.py
+
+- rebuild container (force refresh env. variables)
+docker-compose up -d --build hiremetrics_etl
 """
 
 import logging
@@ -18,9 +21,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+from prefect import flow, task
+
 # Configure logging
 from logging_config import configure_logging, get_logger
-from prefect import flow, task
 
 configure_logging(level=logging.INFO, script_name="ETL")
 logger = get_logger(__name__)

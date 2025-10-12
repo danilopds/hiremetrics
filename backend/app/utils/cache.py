@@ -49,7 +49,9 @@ def cache_result(ttl: int = 300, key_prefix: str = ""):
         @wraps(func)
         def wrapper(*args, **kwargs):
             # Create cache key from function name and arguments
-            cache_key = f"{key_prefix}:{func.__name__}:{hash(str(args) + str(sorted(kwargs.items())))}"
+            cache_key = (
+                f"{key_prefix}:{func.__name__}:{hash(str(args) + str(sorted(kwargs.items())))}"
+            )
 
             # Try to get from cache first
             cached_result = query_cache.get(cache_key)

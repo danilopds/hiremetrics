@@ -10,9 +10,10 @@ Tests the get_top_companies endpoint with various scenarios:
 from unittest.mock import MagicMock, Mock, patch
 
 import pytest
-from app.routers.companies import get_top_companies
 from fastapi import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
+
+from app.routers.companies import get_top_companies
 
 
 class TestGetTopCompanies:
@@ -68,9 +69,7 @@ class TestGetTopCompanies:
         assert params["job_posted_at_date_from"] == "2024-01-01"
         assert params["job_posted_at_date_to"] == "2024-12-31"
 
-    def test_get_top_companies_with_custom_limit(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_get_top_companies_with_custom_limit(self, mock_db_session, mock_get_job_platforms):
         """Test get_top_companies with custom limit parameter"""
         # Arrange
         limited_data = [
@@ -269,9 +268,7 @@ class TestGetTopCompanies:
         assert params["seniority"] == "Senior"
         assert params["search_position_query"] == "Python Developer"
 
-    def test_get_top_companies_empty_results(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_get_top_companies_empty_results(self, mock_db_session, mock_get_job_platforms):
         """Test get_top_companies when no companies match filters"""
         # Arrange
         mock_result = MagicMock()
@@ -350,14 +347,10 @@ class TestGetTopCompanies:
 
     # Error Handling Tests
 
-    def test_get_top_companies_database_error(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_get_top_companies_database_error(self, mock_db_session, mock_get_job_platforms):
         """Test that database errors are handled gracefully"""
         # Arrange
-        mock_db_session.execute.side_effect = SQLAlchemyError(
-            "Database connection error"
-        )
+        mock_db_session.execute.side_effect = SQLAlchemyError("Database connection error")
 
         # Act & Assert
         with pytest.raises(HTTPException) as exc_info:
@@ -375,9 +368,7 @@ class TestGetTopCompanies:
         assert exc_info.value.status_code == 500
         assert "Internal server error" in str(exc_info.value.detail)
 
-    def test_get_top_companies_unexpected_error(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_get_top_companies_unexpected_error(self, mock_db_session, mock_get_job_platforms):
         """Test that unexpected errors return 500 status"""
         # Arrange
         mock_db_session.execute.side_effect = Exception("Unexpected error")
