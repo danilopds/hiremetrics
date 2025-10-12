@@ -106,7 +106,15 @@ Article in PT-BR explaining details of the solution design:
 
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
+We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
+
+- 🐛 How to report issues
+- 🔧 How to submit pull requests
+- 📝 Coding style guidelines (Black, isort, ESLint)
+- ✅ Running tests with pytest
+- 🔄 Review process and expectations
+
+### Quick Start for Contributors
 
 1. **Fork the repository**
 2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
@@ -116,8 +124,7 @@ We welcome contributions! Please follow these steps:
 
 ### Development Guidelines
 
-- Follow the existing code style and conventions
-- Update documentation as needed
+For full details, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## 📄 License
 
