@@ -79,9 +79,7 @@ def authenticate_user(db: Session, email: str, password: str):
     return user
 
 
-def change_user_password(
-    db: Session, user_id: int, current_password: str, new_password: str
-):
+def change_user_password(db: Session, user_id: int, current_password: str, new_password: str):
     """Change user password after verifying current password"""
     user = db.query(models.User).filter(models.User.id == user_id).first()
     if not user:
@@ -191,9 +189,7 @@ def request_password_reset(db: Session, email: str):
 
     # Generate reset token
     reset_token = secrets.token_urlsafe(32)
-    reset_expires = datetime.now(timezone.utc) + timedelta(
-        hours=1
-    )  # Token expires in 1 hour
+    reset_expires = datetime.now(timezone.utc) + timedelta(hours=1)  # Token expires in 1 hour
 
     user.password_reset_token = reset_token
     user.password_reset_expires = reset_expires

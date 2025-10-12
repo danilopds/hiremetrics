@@ -50,9 +50,7 @@ async def register_user(user: schemas.UserCreate, db: Session = Depends(get_db))
 
 
 @router.post("/token")
-async def login(
-    form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)
-):
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     """Login endpoint"""
     user = crud.authenticate_user(db, form_data.username, form_data.password)
     if not user:
@@ -79,9 +77,7 @@ async def login(
 
 
 @router.post("/verify-email", response_model=schemas.EmailVerificationResponse)
-async def verify_email(
-    request: schemas.EmailVerificationRequest, db: Session = Depends(get_db)
-):
+async def verify_email(request: schemas.EmailVerificationRequest, db: Session = Depends(get_db)):
     """Verify user email with token"""
     success, message = crud.verify_user_email(db, request.token)
     if not success:
@@ -112,9 +108,7 @@ async def resend_verification(
 
 
 @router.post("/forgot-password", response_model=schemas.ForgotPasswordResponse)
-async def forgot_password(
-    request: schemas.ForgotPasswordRequest, db: Session = Depends(get_db)
-):
+async def forgot_password(request: schemas.ForgotPasswordRequest, db: Session = Depends(get_db)):
     """Request password reset"""
     success, message = crud.request_password_reset(db, request.email)
     if not success:
@@ -134,9 +128,7 @@ async def forgot_password(
 
 
 @router.post("/reset-password", response_model=schemas.ResetPasswordResponse)
-async def reset_password(
-    request: schemas.ResetPasswordRequest, db: Session = Depends(get_db)
-):
+async def reset_password(request: schemas.ResetPasswordRequest, db: Session = Depends(get_db)):
     """Reset user password with token"""
     success, message = crud.reset_user_password(db, request.token, request.new_password)
     if not success:
@@ -195,17 +187,13 @@ async def google_callback(
     if error:
         # Redirect to frontend with error message
         frontend_url = settings.FRONTEND_URL
-        return RedirectResponse(
-            url=f"{frontend_url}/auth/google-callback?error={error}"
-        )
+        return RedirectResponse(url=f"{frontend_url}/auth/google-callback?error={error}")
 
     # Check if code is provided
     if not code:
         # Redirect to frontend with error message
         frontend_url = settings.FRONTEND_URL
-        return RedirectResponse(
-            url=f"{frontend_url}/auth/google-callback?error=missing_code"
-        )
+        return RedirectResponse(url=f"{frontend_url}/auth/google-callback?error=missing_code")
 
     if not settings.GOOGLE_CLIENT_ID or not settings.GOOGLE_CLIENT_SECRET:
         # Redirect to frontend with error message
@@ -268,24 +256,18 @@ async def google_callback(
 
         # Redirect to frontend with token
         frontend_url = settings.FRONTEND_URL
-        return RedirectResponse(
-            url=f"{frontend_url}/auth/google-callback?token={access_token}"
-        )
+        return RedirectResponse(url=f"{frontend_url}/auth/google-callback?token={access_token}")
 
     except requests.RequestException as e:
         # Redirect to frontend with error message
         frontend_url = settings.FRONTEND_URL
         error_msg = f"google_oauth_error: {str(e)}"
-        return RedirectResponse(
-            url=f"{frontend_url}/auth/google-callback?error={error_msg}"
-        )
+        return RedirectResponse(url=f"{frontend_url}/auth/google-callback?error={error_msg}")
     except Exception as e:
         # Redirect to frontend with error message
         frontend_url = settings.FRONTEND_URL
         error_msg = f"authentication_error: {str(e)}"
-        return RedirectResponse(
-            url=f"{frontend_url}/auth/google-callback?error={error_msg}"
-        )
+        return RedirectResponse(url=f"{frontend_url}/auth/google-callback?error={error_msg}")
 
 
 @router.post("/change-password", response_model=schemas.PasswordChangeResponse)
@@ -303,9 +285,7 @@ async def change_password(
     )
 
     if not success:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Senha atual incorreta"
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Senha atual incorreta")
 
     return schemas.PasswordChangeResponse(message="Senha alterada com sucesso!")
 

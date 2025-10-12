@@ -71,9 +71,7 @@ def build_where_clause_and_params(filters: CSVExportFilters):
         if filters.seniority_levels:
             validated_seniorities = []
             for seniority in filters.seniority_levels:
-                validated_seniority = SecureQueryBuilder.validate_text_input(
-                    seniority, "seniority"
-                )
+                validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
                 validated_seniorities.append(validated_seniority)
             conditions.append("jdb.seniority = ANY(:seniority_levels)")
             params["seniority_levels"] = validated_seniorities
@@ -130,9 +128,7 @@ def build_where_clause_and_params(filters: CSVExportFilters):
         if filters.publishers:
             validated_publishers = []
             for publisher in filters.publishers:
-                validated_publisher = SecureQueryBuilder.validate_text_input(
-                    publisher, "publisher"
-                )
+                validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
                 validated_publishers.append(validated_publisher)
             conditions.append(
                 """

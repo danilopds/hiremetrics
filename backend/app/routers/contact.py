@@ -65,17 +65,17 @@ async def send_contact_email(contact_data: ContactForm):
         traceback.print_exc()
 
         # Provide more specific error messages
-        error_message = "Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente por e-mail."
+        error_message = (
+            "Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente por e-mail."
+        )
 
         if "Authentication" in str(e):
-            error_message = (
-                "Erro de autenticação de e-mail. Verifique as credenciais configuradas."
-            )
+            error_message = "Erro de autenticação de e-mail. Verifique as credenciais configuradas."
         elif "timeout" in str(e).lower():
-            error_message = (
-                "Timeout na conexão de e-mail. Verifique a configuração SMTP."
-            )
+            error_message = "Timeout na conexão de e-mail. Verifique a configuração SMTP."
         elif "connection" in str(e).lower():
-            error_message = "Erro de conexão com servidor de e-mail. Verifique a configuração de rede."
+            error_message = (
+                "Erro de conexão com servidor de e-mail. Verifique a configuração de rede."
+            )
 
         return ContactResponse(success=False, message=error_message)

@@ -24,15 +24,11 @@ router = APIRouter()
 async def public_preview_export(
     job_posted_at_date_from: Optional[str] = Query(None),
     job_posted_at_date_to: Optional[str] = Query(None),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     employer_names: Optional[str] = Query(
         None, description="Comma-separated list of employer names"
     ),
-    publishers: Optional[str] = Query(
-        None, description="Comma-separated list of publishers"
-    ),
+    publishers: Optional[str] = Query(None, description="Comma-separated list of publishers"),
     seniority_levels: Optional[str] = Query(
         None, description="Comma-separated list of seniority levels"
     ),
@@ -53,9 +49,7 @@ async def public_preview_export(
     """
     try:
         # Validate limit parameter
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 1000
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 1000)
 
         # Parse and validate comma-separated parameters
         filters = schemas.CSVExportFilters(
@@ -157,9 +151,7 @@ async def public_preview_export(
 
 
 @router.post("/count-export-records", response_model=ExportCountResponse)
-async def public_count_export_records(
-    request: CSVExportRequest, db: Session = Depends(get_db)
-):
+async def public_count_export_records(request: CSVExportRequest, db: Session = Depends(get_db)):
     """
     Public endpoint for counting export records (no authentication required).
     Used for the home page data preview section to show data volume.
@@ -213,9 +205,7 @@ async def public_get_available_positions(db: Session = Depends(get_db)):
         return positions
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching positions: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching positions: {str(e)}")
 
 
 @router.get("/available-locations", response_model=dict)
@@ -256,9 +246,7 @@ async def public_get_available_locations(db: Session = Depends(get_db)):
         return {"cities": cities, "states": states}
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching locations: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching locations: {str(e)}")
 
 
 @router.get("/available-employment-types", response_model=list[str])
@@ -282,9 +270,7 @@ async def public_get_available_employment_types(db: Session = Depends(get_db)):
         return employment_types
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching employment types: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching employment types: {str(e)}")
 
 
 @router.get("/available-skills", response_model=list[str])
@@ -346,9 +332,7 @@ async def public_get_available_seniority_levels(db: Session = Depends(get_db)):
         return seniority_levels
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching seniority levels: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching seniority levels: {str(e)}")
 
 
 @router.get("/available-companies", response_model=list[str])
@@ -417,9 +401,7 @@ async def public_get_available_companies(db: Session = Depends(get_db)):
         return companies
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching companies: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching companies: {str(e)}")
 
 
 @router.get("/available-publishers", response_model=list[str])
@@ -459,6 +441,4 @@ async def public_get_available_publishers(db: Session = Depends(get_db)):
         return publishers
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Error fetching publishers: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error fetching publishers: {str(e)}")

@@ -33,12 +33,8 @@ def get_publishers_kpis(
     publisher: Optional[str] = Query(None, description="Filter by publisher"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """
@@ -73,9 +69,7 @@ def get_publishers_kpis(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -101,9 +95,7 @@ def get_publishers_kpis(
 
         # Validate publisher input if provided
         if publisher not in (None, "", "null"):
-            validated_publisher = SecureQueryBuilder.validate_text_input(
-                publisher, "publisher"
-            )
+            validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
             params["publisher"] = validated_publisher
 
         # Total unique publishers
@@ -118,9 +110,7 @@ def get_publishers_kpis(
             {publisher_filter}
         """
         publisher_filter = (
-            "WHERE publisher = :publisher"
-            if publisher not in (None, "", "null")
-            else ""
+            "WHERE publisher = :publisher" if publisher not in (None, "", "null") else ""
         )
         total_publishers_query = text(
             total_publishers_base_query.format(
@@ -135,9 +125,7 @@ def get_publishers_kpis(
             FROM target.job_dashboard_base
             {where_clause}
         """
-        avg_publishers_query = text(
-            avg_publishers_base_query.format(where_clause=where_clause)
-        )
+        avg_publishers_query = text(avg_publishers_base_query.format(where_clause=where_clause))
 
         # Publisher with biggest coverage (filtered by publisher if specified)
         biggest_coverage_base_query = """
@@ -212,18 +200,12 @@ def get_publishers_kpis(
         total_publishers_result = db.execute(total_publishers_query, params).fetchone()
         avg_publishers_result = db.execute(avg_publishers_query, params).fetchone()
         biggest_coverage_result = db.execute(biggest_coverage_query, params).fetchone()
-        direct_percentage_result = db.execute(
-            direct_percentage_query, params
-        ).fetchone()
+        direct_percentage_result = db.execute(direct_percentage_query, params).fetchone()
 
         return {
-            "total_publishers": (
-                total_publishers_result[0] if total_publishers_result else 0
-            ),
+            "total_publishers": (total_publishers_result[0] if total_publishers_result else 0),
             "avg_publishers_per_job": (
-                round(float(avg_publishers_result[0] or 0), 2)
-                if avg_publishers_result
-                else 0
+                round(float(avg_publishers_result[0] or 0), 2) if avg_publishers_result else 0
             ),
             "biggest_coverage_publisher": (
                 biggest_coverage_result[0] if biggest_coverage_result else None
@@ -232,9 +214,7 @@ def get_publishers_kpis(
                 biggest_coverage_result[1] if biggest_coverage_result else 0
             ),
             "direct_percentage": (
-                float(direct_percentage_result[0] or 0)
-                if direct_percentage_result
-                else 0
+                float(direct_percentage_result[0] or 0) if direct_percentage_result else 0
             ),
         }
 
@@ -257,20 +237,14 @@ def get_top_publishers(
     publisher: Optional[str] = Query(None, description="Filter by publisher"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get top publishers by volume of publications."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 100
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 100)
 
         # Build secure filters
         filters = []
@@ -300,9 +274,7 @@ def get_top_publishers(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -328,9 +300,7 @@ def get_top_publishers(
 
         # Validate publisher input if provided
         if publisher not in (None, "", "null"):
-            validated_publisher = SecureQueryBuilder.validate_text_input(
-                publisher, "publisher"
-            )
+            validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
             params["publisher"] = validated_publisher
 
         base_query = """
@@ -352,14 +322,10 @@ def get_top_publishers(
             LIMIT :limit
         """
         publisher_filter = (
-            "WHERE publisher = :publisher"
-            if publisher not in (None, "", "null")
-            else ""
+            "WHERE publisher = :publisher" if publisher not in (None, "", "null") else ""
         )
         query = text(
-            base_query.format(
-                where_clause=where_clause, publisher_filter=publisher_filter
-            )
+            base_query.format(where_clause=where_clause, publisher_filter=publisher_filter)
         )
 
         result = db.execute(query, params)
@@ -384,20 +350,14 @@ def get_publishers_seniority_distribution(
     publisher: Optional[str] = Query(None, description="Filter by publisher"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get seniority distribution by top publishers."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 50
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 50)
 
         # Build secure filters
         filters = []
@@ -427,9 +387,7 @@ def get_publishers_seniority_distribution(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -455,9 +413,7 @@ def get_publishers_seniority_distribution(
 
         # Validate publisher input if provided
         if publisher not in (None, "", "null"):
-            validated_publisher = SecureQueryBuilder.validate_text_input(
-                publisher, "publisher"
-            )
+            validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
             params["publisher"] = validated_publisher
 
         base_query = """
@@ -497,14 +453,10 @@ def get_publishers_seniority_distribution(
             ORDER BY publisher, seniority DESC
         """
         publisher_filter = (
-            "WHERE publisher = :publisher"
-            if publisher not in (None, "", "null")
-            else ""
+            "WHERE publisher = :publisher" if publisher not in (None, "", "null") else ""
         )
         query = text(
-            base_query.format(
-                where_clause=where_clause, publisher_filter=publisher_filter
-            )
+            base_query.format(where_clause=where_clause, publisher_filter=publisher_filter)
         )
 
         result = db.execute(query, params)
@@ -530,12 +482,8 @@ def get_publishers_companies_matrix(
     publisher: Optional[str] = Query(None, description="Filter by publisher"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get publisher × company usage matrix."""
@@ -579,9 +527,7 @@ def get_publishers_companies_matrix(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -607,9 +553,7 @@ def get_publishers_companies_matrix(
 
         # Validate publisher input if provided
         if publisher not in (None, "", "null"):
-            validated_publisher = SecureQueryBuilder.validate_text_input(
-                publisher, "publisher"
-            )
+            validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
             params["publisher"] = validated_publisher
 
         # Optimized query with better structure and reduced CTEs
@@ -658,14 +602,10 @@ def get_publishers_companies_matrix(
             ORDER BY md.publisher, md.employer_name
         """
         publisher_filter = (
-            "WHERE publisher = :publisher"
-            if publisher not in (None, "", "null")
-            else ""
+            "WHERE publisher = :publisher" if publisher not in (None, "", "null") else ""
         )
         query = text(
-            base_query.format(
-                where_clause=where_clause, publisher_filter=publisher_filter
-            )
+            base_query.format(where_clause=where_clause, publisher_filter=publisher_filter)
         )
 
         result = db.execute(query, params)
@@ -690,20 +630,14 @@ def get_publishers_timeline(
     publisher: Optional[str] = Query(None, description="Filter by publisher"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get publishers timeline data."""
     try:
         # Validate and sanitize inputs
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 20
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 20)
 
         # Build secure filters
         filters = []
@@ -733,9 +667,7 @@ def get_publishers_timeline(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -761,9 +693,7 @@ def get_publishers_timeline(
 
         # Validate publisher input if provided
         if publisher not in (None, "", "null"):
-            validated_publisher = SecureQueryBuilder.validate_text_input(
-                publisher, "publisher"
-            )
+            validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
             params["publisher"] = validated_publisher
 
         base_query = """
@@ -802,14 +732,10 @@ def get_publishers_timeline(
             ORDER BY job_posted_at_date, publisher
         """
         publisher_filter = (
-            "WHERE publisher = :publisher"
-            if publisher not in (None, "", "null")
-            else ""
+            "WHERE publisher = :publisher" if publisher not in (None, "", "null") else ""
         )
         query = text(
-            base_query.format(
-                where_clause=where_clause, publisher_filter=publisher_filter
-            )
+            base_query.format(where_clause=where_clause, publisher_filter=publisher_filter)
         )
 
         result = db.execute(query, params)
@@ -833,12 +759,8 @@ def get_direct_vs_indirect_distribution(
     publisher: Optional[str] = Query(None, description="Filter by publisher"),
     seniority: Optional[str] = Query(None, description="Filter by seniority level"),
     employer_name: Optional[str] = Query(None, description="Filter by company name"),
-    job_is_remote: Optional[str] = Query(
-        None, description="Filter by remote (true/false)"
-    ),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    job_is_remote: Optional[str] = Query(None, description="Filter by remote (true/false)"),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     db: Session = Depends(get_db),
 ):
     """Get direct vs indirect application distribution."""
@@ -871,9 +793,7 @@ def get_direct_vs_indirect_distribution(
             params["employer_name"] = validated_employer
 
         if seniority not in (None, "", "null"):
-            validated_seniority = SecureQueryBuilder.validate_text_input(
-                seniority, "seniority"
-            )
+            validated_seniority = SecureQueryBuilder.validate_text_input(seniority, "seniority")
             filters.append("seniority = :seniority")
             params["seniority"] = validated_seniority
 
@@ -899,9 +819,7 @@ def get_direct_vs_indirect_distribution(
 
         # Validate publisher input if provided
         if publisher not in (None, "", "null"):
-            validated_publisher = SecureQueryBuilder.validate_text_input(
-                publisher, "publisher"
-            )
+            validated_publisher = SecureQueryBuilder.validate_text_input(publisher, "publisher")
             params["publisher"] = validated_publisher
 
         base_query = """

@@ -21,9 +21,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+from prefect import flow, task
+
 # Configure logging
 from logging_config import configure_logging, get_logger
-from prefect import flow, task
 
 configure_logging(level=logging.INFO, script_name="ETL")
 logger = get_logger(__name__)

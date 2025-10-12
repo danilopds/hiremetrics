@@ -7,9 +7,7 @@ from .. import models
 from ..utils.auth_utils import create_access_token
 
 
-def create_user_token(
-    user: models.User, expires_delta: Optional[timedelta] = None
-) -> str:
+def create_user_token(user: models.User, expires_delta: Optional[timedelta] = None) -> str:
     """Create JWT access token for user"""
 
     data = {

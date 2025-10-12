@@ -21,9 +21,7 @@ class TestYourEndpoint:
     # VALID INPUT TESTS
     # ====================================
 
-    def test_endpoint_with_default_parameters(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_endpoint_with_default_parameters(self, mock_db_session, mock_get_job_platforms):
         """Test endpoint with default parameters"""
         # Arrange
         expected_data = [{"id": 1, "name": "Test"}]
@@ -77,9 +75,7 @@ class TestYourEndpoint:
     # INPUT VALIDATION TESTS
     # ====================================
 
-    def test_endpoint_with_invalid_parameter(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_endpoint_with_invalid_parameter(self, mock_db_session, mock_get_job_platforms):
         """Test that invalid parameters raise appropriate errors"""
         # Act & Assert
         # with pytest.raises(HTTPException) as exc_info:
@@ -87,9 +83,7 @@ class TestYourEndpoint:
         # assert exc_info.value.status_code == 400
         pass
 
-    def test_endpoint_sql_injection_prevention(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_endpoint_sql_injection_prevention(self, mock_db_session, mock_get_job_platforms):
         """Test that SQL injection attempts are blocked"""
         # Act & Assert
         # with pytest.raises(HTTPException) as exc_info:
@@ -132,9 +126,7 @@ class TestYourEndpoint:
     # EDGE CASES
     # ====================================
 
-    def test_endpoint_with_boundary_values(
-        self, mock_db_session, mock_get_job_platforms
-    ):
+    def test_endpoint_with_boundary_values(self, mock_db_session, mock_get_job_platforms):
         """Test with boundary values (min/max)"""
         # Test minimum value
         # result_min = your_function(limit=1, db=mock_db_session)

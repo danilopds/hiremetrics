@@ -185,15 +185,11 @@ async def export_csv(
 async def preview_export(
     job_posted_at_date_from: Optional[str] = Query(None),
     job_posted_at_date_to: Optional[str] = Query(None),
-    search_position_query: Optional[str] = Query(
-        None, description="Filter by position query"
-    ),
+    search_position_query: Optional[str] = Query(None, description="Filter by position query"),
     employer_names: Optional[str] = Query(
         None, description="Comma-separated list of employer names"
     ),
-    publishers: Optional[str] = Query(
-        None, description="Comma-separated list of publishers"
-    ),
+    publishers: Optional[str] = Query(None, description="Comma-separated list of publishers"),
     seniority_levels: Optional[str] = Query(
         None, description="Comma-separated list of seniority levels"
     ),
@@ -212,9 +208,7 @@ async def preview_export(
     """Preview the first N records that would be exported"""
     try:
         # Validate limit parameter
-        validated_limit = SecureQueryBuilder.validate_integer_input(
-            limit, "limit", 1, 1000
-        )
+        validated_limit = SecureQueryBuilder.validate_integer_input(limit, "limit", 1, 1000)
 
         # Parse and validate comma-separated parameters
         filters = schemas.CSVExportFilters(
@@ -334,16 +328,12 @@ async def get_available_locations(db: Session = Depends(get_db)):
         locations = result.mappings().all()
 
         cities = sorted(list(set([loc.job_city for loc in locations if loc.job_city])))
-        states = sorted(
-            list(set([loc.job_state for loc in locations if loc.job_state]))
-        )
+        states = sorted(list(set([loc.job_state for loc in locations if loc.job_state])))
 
         return {"cities": cities, "states": states}
 
     except Exception as e:
-        raise HTTPException(
-            status_code=400, detail=f"Error fetching locations: {str(e)}"
-        )
+        raise HTTPException(status_code=400, detail=f"Error fetching locations: {str(e)}")
 
 
 @router.get("/available-employment-types", response_model=list[str])
@@ -364,6 +354,4 @@ async def get_available_employment_types(db: Session = Depends(get_db)):
         return types
 
     except Exception as e:
-        raise HTTPException(
-            status_code=400, detail=f"Error fetching employment types: {str(e)}"
-        )
+        raise HTTPException(status_code=400, detail=f"Error fetching employment types: {str(e)}")
