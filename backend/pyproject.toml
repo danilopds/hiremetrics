@@ -1,0 +1,45 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "FastAPI backend service for HireMetrics - Job Market Analytics Platform"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "HireMetrics Team"}
+]
+keywords = ["fastapi", "api", "backend", "job-analytics", "postgresql", "sqlalchemy"]
+
+dependencies = [
+    "bcrypt==4.0.1",
+    "black==25.9.0",
+    "email-validator==2.1.0.post1",
+    "faker==20.1.0",
+    "fastapi==0.111.0",
+    "fastapi-mail==1.4.1",
+    "httpx==0.25.2",
+    "isort==6.1.0",
+    "passlib==1.7.4",
+    "psycopg2-binary==2.9.9",
+    "pydantic==2.9.1",
+    "pydantic-settings==2.9.1",
+    "pytest==7.4.3",
+    "pytest-asyncio==0.21.1",
+    "pytest-cov==4.1.0",
+    "pytest-mock==3.12.0",
+    "python-dotenv==1.0.0",
+    "python-jose[cryptography]==3.3.0",
+    "requests==2.31.0",
+    "sqlalchemy==2.0.23",
+    "uvicorn==0.24.0",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
